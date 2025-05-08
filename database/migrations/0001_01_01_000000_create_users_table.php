@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('role')->default('tenant');
             $table->string('email')->unique();
+            $table->boolean('booked_appointment')->default(false);
+            $table->boolean('viewed_cottage')->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

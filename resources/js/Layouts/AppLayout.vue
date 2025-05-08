@@ -14,10 +14,11 @@
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-6">
               <Link href="/" class="nav-link">Home</Link>
-              <Link href="/cottages" class="nav-link">Available Cottages</Link>
               <Link href="/how-it-works" class="nav-link">How it Works</Link>
               <Link href="/apply" class="nav-link">Apply to Rent</Link>
               <Link href="/contact" class="nav-link">Contact Us</Link>
+              <Link href="/cottages" class="nav-link">Available Cottages</Link>
+
             </div>
 
             <!-- Login/Register -->
@@ -62,9 +63,10 @@
       </nav>
 
       <!-- Page Content -->
-      <main class="p-0">
+      <main class="">
         <slot />
       </main>
+      <Footer />
     </div>
   </template>
 
@@ -72,6 +74,7 @@
   import { ref } from 'vue'
   import { Link } from '@inertiajs/vue3'
   import Logo from '@/images/logo.png'
+  import Footer from '@/Shared/Footer.vue'
 
   const isOpen = ref(false);
 
