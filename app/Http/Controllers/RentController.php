@@ -9,6 +9,8 @@ class RentController extends Controller
 {
     public function create()
     {
-        return Inertia::render('ApplyToRent/create');
+        return Inertia::render('ApplyToRent/Create',[
+            'user' => auth()->user(),
+        ]);
     }
 }

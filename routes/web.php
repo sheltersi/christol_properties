@@ -23,12 +23,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/apply-to-rent/create',[RentController::class, 'create'])->name('rent.create');
+    // Route::get('/apply-to-rent/create',[RentController::class, 'create'])->name('rent.create');
     Route::post('/appointments',[AppointmentController::class, 'store'])->name('appointments.store');
-
+    Route::get('/apply-to-rent/create',[RentController::class, 'create'])->name('rent.create');
 });
-// Route::post('/apply-to-rent/create',[RentController::class, 'create'])->name('rent.create');
 
 Route::get('/cottages', [CottageController::class, 'index'])->name('cottages.index');
 
 require __DIR__.'/auth.php';
+
+

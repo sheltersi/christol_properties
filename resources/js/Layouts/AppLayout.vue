@@ -15,7 +15,7 @@
             <div class="hidden md:flex items-center space-x-6">
               <Link href="/" class="nav-link">Home</Link>
               <Link href="/how-it-works" class="nav-link">How it Works</Link>
-              <Link href="/apply" class="nav-link">Apply to Rent</Link>
+              <Link href="{{ route('rent.create') }}" class="nav-link">Apply to Rent</Link>
               <Link href="/contact" class="nav-link">Contact Us</Link>
               <Link href="/cottages" class="nav-link">Available Cottages</Link>
 
