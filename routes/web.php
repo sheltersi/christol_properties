@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CottageController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RentController;
 use Illuminate\Foundation\Application;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -25,8 +27,25 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Route::get('/apply-to-rent/create',[RentController::class, 'create'])->name('rent.create');
     Route::post('/appointments',[AppointmentController::class, 'store'])->name('appointments.store');
+    Route::get('/appointments',[AppointmentController::class, 'index'])->name('appointments.index');
+
     Route::get('/apply-to-rent/create',[RentController::class, 'create'])->name('rent.create');
+    Route::post('/apply-to-rent',[RentController::class, 'store'])->name('rent.store');
+    Route::get('/notifications',[NotificationController::class, 'index'])->name('notifications.index');
+
+    Route::get('/admin/notifications/unread-count', function () {
+        return response()->json([
+            'count' => auth()->user()->unreadNotifications()->count()
+        ]);
+    });
+
 });
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::post('/admin/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])
+        ->name('admin.notifications.read');
+});
+
 
 Route::get('/cottages', [CottageController::class, 'index'])->name('cottages.index');
 

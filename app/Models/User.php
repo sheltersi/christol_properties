@@ -6,11 +6,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +24,8 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    protected $appends = ['full_name'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -47,9 +50,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function appointment()
+    public function appointments()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Appointment::class);
     }
 
     public function rent()
@@ -57,5 +60,10 @@ class User extends Authenticatable
         return $this->hasOne(Rent::class);
     }
 
- 
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+
 }

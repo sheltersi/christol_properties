@@ -18,7 +18,7 @@ class Appointment extends Model
 
     public function user()
     {
-        return $this->hasOne(Appointment::class);
+        return $this->belongsTo(Appointment::class);
     }
 
 }

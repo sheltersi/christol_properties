@@ -23,7 +23,16 @@ class UserSeeder extends Seeder
             'email' => 'shelter@gmail.com',
             'email_verified_at' => now(),
             'password' => 'password123',
-            // 'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'first_name' => 'chris',
+            'last_name' => 'ugbaja',
+            'role' => 'admin',
+            'email' => 'chris@gmail.com',
+            'email_verified_at' => now(),
+            'password' => 'password123',
             'remember_token' => Str::random(10),
         ]);
     }
