@@ -35,5 +35,25 @@ class UserSeeder extends Seeder
             'password' => 'password123',
             'remember_token' => Str::random(10),
         ]);
+
+        User::create([
+            'first_name' => 'fadzai',
+            'last_name' => 'bridges',
+            'role' => 'tenant',
+            'email' => 'fadzai@gmail.com',
+            'email_verified_at' => now(),
+            'password' => 'password123',
+            'remember_token' => Str::random(10),
+        ]);
+
+        User::create([
+            'first_name' => 'susan',
+            'last_name' => 'williams',
+            'role' => 'tenant',
+            'email' => 'susan@gmail.com',
+            'email_verified_at' => now(),
+            'password' => 'password123',
+            'remember_token' => Str::random(10),
+        ]);
     }
 }

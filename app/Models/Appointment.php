@@ -2,11 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-    //
+    use HasFactory;
     protected $fillable = [
         'cottage_number',
         'preferred_date',
@@ -18,7 +19,7 @@ class Appointment extends Model
 
     public function user()
     {
-        return $this->belongsTo(Appointment::class);
+        return $this->belongsTo(User::class,'user_id');
     }
 
 }

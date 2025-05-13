@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import ApplicationLogo from '@/images/logo.png';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -8,6 +8,7 @@ import { Link } from '@inertiajs/vue3';
 import SidebarLink from './SidebarLink.vue';
 import { MenuIcon, XIcon } from 'lucide-vue-next';
 import axios from 'axios';
+import { usePage } from '@inertiajs/vue3';
 
 const unreadCount = ref(0);
 
@@ -15,20 +16,24 @@ const notificationCount = ref(0)
 
 
 const drawerOpen = ref(false);
+// const page = usePage();
+
+// const isAdmin = computed(() => page.props.auth.user?.role === 'admin');
+// const isTenant = computed(() => page.props.auth.user?.role === 'tenant');
 
 onMounted(async () => {
     const res = await axios.get('/admin/notifications/unread-count')
     unreadCount.value = res.data.count
 });
 
-onMounted(() => {
-    window.Echo.private(`App.Models.User.${window.user.id}`)
-        .notification((notification) => {
-            notificationCount.value += 1
-            // Optionally fetch notifications again:
-            // router.reload({ only: ['notifications'] })
-        })
-});
+// onMounted(() => {
+//     window.Echo.private(`App.Models.User.${window.user.id}`)
+//         .notification((notification) => {
+//             notificationCount.value += 1
+//             // Optionally fetch notifications again:
+//             // router.reload({ only: ['notifications'] })
+//         })
+// });
 
 </script>
 
@@ -52,6 +57,10 @@ onMounted(() => {
                 <SidebarLink :to="route('dashboard')" label="Book Appointment" />
                 <SidebarLink :to="route('appointments.index')" label="My Appointments" />
                 <SidebarLink :to="route('rent.create')" label="Apply to rent" />
+                <SidebarLink :to="route('all-appointments.index')" label="View Appointments" />
+                <SidebarLink :to="route('logout')" label="Logout" method="post" as="button" />
+
+
             </nav>
         </aside>
 
@@ -78,26 +87,25 @@ onMounted(() => {
               Notifications
             </NavLink> -->
                     </div>
-                    <div>
+                    <!-- <div> -->
 
-                        <div class="relative">
+                        <!-- <div class="relative">
                             <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24">
-                                <!-- Bell Icon -->
                             </svg>
                             <span v-if="notificationCount > 0"
                                 class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
                                 {{ notificationCount }}
                             </span>
-                        </div>
+                        </div> -->
 
-                        <NavLink href="{{ route('notifications.index') }}" class="relative">
+                        <!-- <NavLink href="{{ route('notifications.index') }}" class="relative">
                             🔔 Notifications
                             <span v-if="unreadCount > 0"
                                 class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-1">
                                 {{ unreadCount }}
                             </span>
-                        </NavLink>
-                    </div>
+                        </NavLink> -->
+                    <!-- </div> -->
 
                     <!-- User Dropdown -->
                     <Dropdown :align="right" width="48">
