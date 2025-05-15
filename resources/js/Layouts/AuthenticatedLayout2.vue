@@ -28,7 +28,7 @@ const drawerOpen = ref(false);
                         <NavLink :href="route('dashboard')" :active="route().current('dashbord')">
                             Book Appointment
                         </NavLink>
-                        <NavLink :href="route('rent.create')" :active="route().current('rent.create')">
+                        <NavLink :href="route('application.create')" :active="route().current('application.create')">
                             Apply to rent
                         </NavLink>
                     </div>

@@ -196,7 +196,7 @@ const form = useForm({
 });
 
 function submit() {
-    form.post(route('rent.store'), {
+    form.post(route('application.store'), {
         forceFormData: true, // required for file upload
         onSuccess: () => {
             Swal.fire({

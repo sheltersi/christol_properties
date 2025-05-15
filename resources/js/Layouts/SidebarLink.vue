@@ -1,25 +1,30 @@
 <template>
-    <a
-      :href="to"
-      :method="method"
-      :as="as"
-      class="block px-4 py-2 rounded hover:bg-gray-700"
-    >
-      {{ label }}
+    <a :href="to" :method="method" :as="as" class="side-link block px-4 py-2 rounded hover:bg-gray-700"
+        :class="{ 'bg-gray-200 font-semibold text-blue-700': active }">
+        {{ label }}
     </a>
-  </template>
+</template>
 
-  <script setup>
-  defineProps({
+<script setup>
+import { Link } from '@inertiajs/vue3';
+
+defineProps({
     to: String,
     label: String,
-    method:{
-        type:String,
-        default:'get'
+    active: Boolean,
+    method: {
+        type: String,
+        default: 'get'
     },
-    as:{
-        type:String,
-        default:'a'
+    as: {
+        type: String,
+        default: 'a'
     }
-  });
-  </script>
+});
+</script>
+
+<style scoped>
+.sidebar-link {
+    @apply block px-4 py-2 rounded text-gray-700 hover:bg-gray-100 transition;
+}
+</style>

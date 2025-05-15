@@ -83,6 +83,6 @@
   }
 
   const submit = () => {
-    form.post(route('rent.store'))
+    form.post(route('application.store'))
   }
   </script>

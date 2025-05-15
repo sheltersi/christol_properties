@@ -21,7 +21,7 @@ class AppointmentFactory extends Factory
             'cottage_number' => fake()->numberBetween(1,18),
             'preferred_time' => fake()->time(),
             'preferred_date' => fake()->date(),
-            'status' => fake()->randomElement(['pending','confirmed','declined']),
+            'status' => fake()->randomElement(['pending','confirmed','declined','revoked']),
             'message'=> fake()->sentence()
                 ];
     }

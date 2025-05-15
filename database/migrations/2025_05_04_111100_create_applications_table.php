@@ -11,26 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rents', function (Blueprint $table) {
-            $table->id();
+        Schema::create('applications', function (Blueprint $table) {
+        $table->id();
         $table->foreignId('user_id')->constrained()->onDelete('cascade'); // If you're linking the rent to a user
         $table->string('phone');
-        $table->date('dob');
+        $table->string('dob');
         $table->string('id_number');
         $table->string('current_address');
         $table->integer('occupants');
         $table->boolean('pets')->nullable(); // If it's a checkbox
         $table->string('employer');
         $table->string('job_title');
-        $table->date('employment_start');
-        $table->decimal('monthly_income', 10, 2);
+        $table->string('employment_start');
+        $table->string('monthly_income', 10, 2);
         $table->string('employer_contact');
         $table->string('landlord_name');
         $table->string('landlord_contact');
-        $table->decimal('rent_amount', 10, 2);
+        $table->string('rent_amount', 10, 2);
         $table->string('reason_leaving');
+        $table->string('status')->default('pending');
         $table->boolean('agree');
-            $table->timestamps();
+        $table->timestamps();
         });
     }
 
@@ -39,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rents');
+        Schema::dropIfExists('applications');
     }
 };

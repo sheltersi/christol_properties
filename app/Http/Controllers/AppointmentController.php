@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\User;
+use App\Notifications\AppointmentConfirmedNotification;
 use App\Notifications\NewAppointmentRequest;
 use App\Notifications\TenantAppointmentBooked;
 use Illuminate\Http\Request;
@@ -101,6 +102,11 @@ class AppointmentController extends Controller
     public function confirm(Appointment $appointment)
     {
         $appointment->update(['status' => 'confirmed']);
+
+        $user = $appointment->user;
+
+        $user->notify(new AppointmentConfirmedNotification($appointment));
+
         return redirect()->route('all-appointments.index')->with('success', 'Appointment confirmed.');
     }
 }

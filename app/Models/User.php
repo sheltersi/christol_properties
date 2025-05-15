@@ -55,9 +55,9 @@ class User extends Authenticatable
         return $this->hasMany(Appointment::class);
     }
 
-    public function rent()
+    public function Application()
     {
-        return $this->hasOne(Rent::class);
+        return $this->hasOne(Application::class);
     }
 
     public function getFullNameAttribute()

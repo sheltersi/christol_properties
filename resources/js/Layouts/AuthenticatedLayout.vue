@@ -16,24 +16,14 @@ const notificationCount = ref(0)
 
 
 const drawerOpen = ref(false);
-// const page = usePage();
+const page = usePage();
 
-// const isAdmin = computed(() => page.props.auth.user?.role === 'admin');
-// const isTenant = computed(() => page.props.auth.user?.role === 'tenant');
+const isAdmin = computed(() => page.props.auth.user?.role === 'admin');
 
 onMounted(async () => {
     const res = await axios.get('/admin/notifications/unread-count')
     unreadCount.value = res.data.count
 });
-
-// onMounted(() => {
-//     window.Echo.private(`App.Models.User.${window.user.id}`)
-//         .notification((notification) => {
-//             notificationCount.value += 1
-//             // Optionally fetch notifications again:
-//             // router.reload({ only: ['notifications'] })
-//         })
-// });
 
 </script>
 
@@ -54,13 +44,13 @@ onMounted(async () => {
                 </button>
             </div>
             <nav class="mt-4 space-y-2 px-4">
-                <SidebarLink :to="route('dashboard')" label="Book Appointment" />
-                <SidebarLink :to="route('appointments.index')" label="My Appointments" />
-                <SidebarLink :to="route('rent.create')" label="Apply to rent" />
-                <SidebarLink :to="route('all-appointments.index')" label="View Appointments" />
-                <SidebarLink :to="route('logout')" label="Logout" method="post" as="button" />
-
-
+                <SidebarLink v-if = "!isAdmin" :to="route('dashboard')" :active="route().current('dashboard')" label="Book Appointment" />
+                <SidebarLink v-if = "!isAdmin" :to="route('appointments.index')"  :active="route().current('appointments.index')" label="My Appointments" />
+                <SidebarLink v-if = "!isAdmin" :to="route('application.create')"  :active="route().current('application.create')" label="Apply to rent" />
+                <SidebarLink v-if = "isAdmin" :to="route('all-appointments.index')" :active="route().current('all-appointments.index')" label="Appointments" />
+                <SidebarLink v-if = "isAdmin" :to="route('applications.index')"  :active="route().current('applications.index')" label="Available Applications" />
+                <SidebarLink v-if = "isAdmin" :to="route('all-appointments.index')" label="All Tenants" />
+                <SidebarLink v-if = "isAdmin" :to="route('all-appointments.index')" label="All registered users" />
             </nav>
         </aside>
 
@@ -76,36 +66,15 @@ onMounted(async () => {
                         <Link :href="route('dashboard')">
                         <img :src="ApplicationLogo" alt="Logo" class="h-9 w-auto" />
                         </Link>
-                        <NavLink :href="route('dashboard')" :active="route().current('dashboard')">Book Appointment
+                        <NavLink v-if = "!isAdmin" :href="route('dashboard')" :active="route().current('dashboard')">Book Appointment
                         </NavLink>
-                        <NavLink :href="route('appointments.index')" :active="route().current('appointments.index')">My Appointments
+                        <NavLink v-if = "!isAdmin" :href="route('appointments.index')" :active="route().current('appointments.index')">My Appointments
                         </NavLink>
-                        <NavLink :href="route('rent.create')" :active="route().current('rent.create')">
+                        <NavLink v-if = "!isAdmin" :href="route('application.create')" :active="route().current('application.create')">
                             Apply to rent
                         </NavLink>
-                        <!-- <NavLink :href="route('rent.create')" :active="route().current('rent.create')" :align=right>
-              Notifications
-            </NavLink> -->
+
                     </div>
-                    <!-- <div> -->
-
-                        <!-- <div class="relative">
-                            <svg class="w-6 h-6 text-gray-600" fill="none" viewBox="0 0 24 24">
-                            </svg>
-                            <span v-if="notificationCount > 0"
-                                class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full px-1">
-                                {{ notificationCount }}
-                            </span>
-                        </div> -->
-
-                        <!-- <NavLink href="{{ route('notifications.index') }}" class="relative">
-                            🔔 Notifications
-                            <span v-if="unreadCount > 0"
-                                class="absolute top-0 right-0 bg-red-500 text-white rounded-full text-xs px-1">
-                                {{ unreadCount }}
-                            </span>
-                        </NavLink> -->
-                    <!-- </div> -->
 
                     <!-- User Dropdown -->
                     <Dropdown :align="right" width="48">

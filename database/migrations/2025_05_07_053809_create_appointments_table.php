@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('preferred_date');
             $table->string('preferred_time');
             $table->string('message');
-            $table->enum('status',['pending', 'confirmed','declined'])->default('pending');
+            $table->enum('status',['pending', 'confirmed','declined','revoked'])->default('pending');
             $table->timestamps();
         });
     }

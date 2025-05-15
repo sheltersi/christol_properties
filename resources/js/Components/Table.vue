@@ -19,7 +19,7 @@ defineProps({
           <th class="text-left px-3 py-2 bg-gray-100">Actions</th>
         </tr>
       </thead>
-      <tbody>
+      <!-- <tbody>
         <tr v-for="row in rows" :key="row.id" class="border-b">
           <td v-for="col in columns" :key="col.key" class="px-3 py-2">
             {{ row[col.key] }}
@@ -28,7 +28,20 @@ defineProps({
             <slot name="actions" :row="row" />
           </td>
         </tr>
-      </tbody>
+      </tbody> -->
+      <tbody>
+  <tr v-for="row in rows" :key="row.id" class="border-b">
+    <td v-for="col in columns" :key="col.key" class="px-3 py-2">
+      <slot :name="col.key" :row="row">
+        {{ row[col.key] }}
+      </slot>
+    </td>
+    <td class="px-3 py-2">
+      <slot name="actions" :row="row" />
+    </td>
+  </tr>
+</tbody>
+
     </table>
 
     <!-- Pagination -->
