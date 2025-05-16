@@ -11,9 +11,17 @@ class Cottage extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
    protected $fillable = [
+    'user_id',
     'number',
     'location',
     'price_per_month',
-    'is_available'
+    'is_available',
+    'status'
    ];
+
+   public function user()
+   {
+
+    return $this->belongsTo(User::class);
+   }
 }

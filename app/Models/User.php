@@ -60,6 +60,11 @@ class User extends Authenticatable
         return $this->hasOne(Application::class);
     }
 
+    public function cottage()
+    {
+        return $this->hasOne(Cottage::class);
+    }
+
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";

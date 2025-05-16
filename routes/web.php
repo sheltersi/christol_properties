@@ -6,6 +6,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CottageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TenantDashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,7 @@ Route::middleware('auth')->group(function () {
     # Rental Applications Routes
     Route::get('tenants/applications',[ApplicationController::class, 'index'])->name('applications.index');
     Route::get('tenants/applications/{application}',[ApplicationController::class, 'show'])->name('applications.show');
+    Route::get('/tenant/dashboard', [TenantDashboardController::class, 'index'])->name('tenant.dashboard');
 
 
 

@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('cottages', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('number');
             $table->string('location');
             $table->string('price_per_month');
             $table->boolean('is_available');
+            $table->string('status')->default('available');
             $table->timestamps();
         });
     }
