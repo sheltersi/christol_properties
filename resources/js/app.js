@@ -2,6 +2,7 @@ import '../css/app.css';
 import './bootstrap';
 
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import Swal from 'sweetalert2';
 import { createApp, h } from 'vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -10,6 +11,9 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { createInertiaApp } from '@inertiajs/vue3';
 
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
+
+window.Swal = Swal;
+
 
 library.add(faUser, faChevronDown, faAngleDown);
 

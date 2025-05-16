@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted,watch, onUnmounted, computed } from 'vue';
 import ApplicationLogo from '@/images/logo.png';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
@@ -8,6 +8,7 @@ import { Link } from '@inertiajs/vue3';
 import SidebarLink from './SidebarLink.vue';
 import { MenuIcon, XIcon } from 'lucide-vue-next';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import { usePage } from '@inertiajs/vue3';
 
 const unreadCount = ref(0);
@@ -20,9 +21,33 @@ const page = usePage();
 
 const isAdmin = computed(() => page.props.auth.user?.role === 'admin');
 
+// ✅ Watch for flash messages
+watch(() => page.props.flash, (flash) => {
+  if (flash.success) {
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: flash.success,
+    });
+  }
+
+  if (flash.error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: flash.error,
+    });
+  }
+}, { immediate: true }); // Optional: run immediately on mount
+
+// ✅ Unread notification count
 onMounted(async () => {
-    const res = await axios.get('/admin/notifications/unread-count')
-    unreadCount.value = res.data.count
+  try {
+    const res = await axios.get('/admin/notifications/unread-count');
+    unreadCount.value = res.data.count;
+  } catch (error) {
+    console.error('Failed to fetch unread count:', error);
+  }
 });
 
 </script>

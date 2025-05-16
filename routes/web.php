@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CottageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ApplicationController;
 use Illuminate\Foundation\Application;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/appointments/{appointment}', [AppointmentController::class, 'show'])->name('appointments.show');
     Route::put('/appointments/{appointment}/confirm', [AppointmentController::class, 'confirm'])->name('appointments.confirm');
     Route::get('tenants/appointments',[AppointmentController::class, 'allAppointments'])->name('all-appointments.index');
+    Route::post('/appointments/{appointment}/revoke', [AppointmentController::class, 'revoke'])->name('appointments.revoke');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+
 
 
     # Rental Applications Routes

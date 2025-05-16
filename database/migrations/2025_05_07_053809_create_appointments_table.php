@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('preferred_time');
             $table->string('message');
             $table->enum('status',['pending', 'confirmed','declined','revoked'])->default('pending');
+            $table->text('revoked_reason')->nullable();
             $table->timestamps();
         });
     }

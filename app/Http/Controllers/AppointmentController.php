@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Appointment;
 use App\Models\User;
 use App\Notifications\AppointmentConfirmedNotification;
+use App\Notifications\AppointmentRevoked;
 use App\Notifications\NewAppointmentRequest;
 use App\Notifications\TenantAppointmentBooked;
 use Illuminate\Http\Request;
@@ -94,6 +95,8 @@ class AppointmentController extends Controller
 
     public function show(Appointment $appointment)
     {
+        // dd($appointment->user->first_name);
+        $appointment->load('user');
         return Inertia::render('Appointments/Show', [
             'appointment' => $appointment,
         ]);
@@ -109,4 +112,22 @@ class AppointmentController extends Controller
 
         return redirect()->route('all-appointments.index')->with('success', 'Appointment confirmed.');
     }
+
+        public function revoke(Request $request, Appointment $appointment)
+    {
+        $request->validate(['reason' => 'required|string|max:1000']);
+
+        $appointment->status = 'revoked';
+        $appointment->revoked_reason = $request->reason;
+        $appointment->save();
+
+        $user = $appointment->user;
+        // Send notification to user (example)
+        // Mail::to($appointment->user->email)->send(new AppointmentRevoked($appointment));
+
+        $user->notify(new AppointmentRevoked($appointment));
+
+        return redirect()->back()->with('success', 'Appointment revoked and user notified.');
+    }
+
 }
