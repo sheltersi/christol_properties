@@ -38,7 +38,7 @@ const rows = props.applications.data.map(item => ({
 }));
 
 const viewApplication = (id) => {
-    router.get(route('applications.show','id'));
+    router.get(route('tenant.applications',id));
 };
 
 // const confirmAppointment = (id) => {
@@ -54,10 +54,12 @@ const viewApplication = (id) => {
 
 <template #actions="{row}">
     <AuthenticatedLayout>
-        <div>
-            
-        </div>
-  <div class="p-6 space-y-4">
+
+  <div class="p-6 space-y-4 mt-4 mx-4 bg-white">
+    <div>
+        <h1 class="text-xl font-bold mt-4 m-4">All Submitted Applications</h1>
+        <hr>
+</div>
     <input
       v-model="search"
       placeholder="Search by user name"

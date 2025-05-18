@@ -1,14 +1,14 @@
 <script setup>
-import { router, usePage } from '@inertiajs/vue3';
+import { router, usePage} from '@inertiajs/vue3';
+import { computed } from 'vue';
 import ReusableTable from '@/Components/Table.vue';
 import {debounce} from 'lodash'
 import { ref, watch } from 'vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
-const props = defineProps({
-  appointments: Object,
-  filters: Object,
-});
+const page = usePage();
+
+const props = defineProps(['appointments', 'filters']);
 
 const showRevokeModal = ref(false);
 const revokeReason = ref('');
@@ -31,21 +31,18 @@ const submitRevocation = () => {
   });
 };
 
-const search = ref(props.filters.search || '');
+const search = ref(page.props.filters?.search || '');
 
-// Refetch when search changes
-watch(search, (val) => {
-    console.log('Searching for:', val);
-  router.get(route('all-appointments.index'), { search: val }, { preserveState: true, replace: true });
+watch(search, (value) => {
+  router.get(route('all-appointments.index'), { search: value }, {
+    preserveScroll: true,
+    replace: true,
+  });
 });
-
-// watch(search, debounce((val) => {
-//   router.get(route('all-appointments.index'), { search: val }, { preserveState: true, replace: true });
-// }, 300));
 
 const columns = [
   { key: 'id', label: 'ID' },
-  { key: 'user.first_name', label: 'User' },
+  { key: 'user.full_name', label: 'User' },
   { key: 'cottage_number', label: 'Cottage No' },
   { key: 'preferred_date', label: 'Date' },
   { key: 'preferred_time', label: 'Time' },
@@ -54,7 +51,7 @@ const columns = [
 
 const rows = props.appointments.data.map(item => ({
   ...item,
-  'user.first_name': item.user?.first_name || 'N/A',
+  'user.full_name': item.user?.full_name || 'N/A',
 }));
 
 const viewAppointment = (id) => {
@@ -70,15 +67,84 @@ const confirmAppointment = (id) => {
         });
     }
 };
+
+
+
+const activeStatus = computed(() => page.props.filters?.status ?? 'all');
+
+function filterAppointments(status){
+    activeStatus.value = status;
+
+    router.get(route('all-appointments.index'),{status},{
+        replace: true,
+        preserveScroll: true,
+        // preserveState: true,
+    });
+}
+
+
+function filterToday() {
+  activeStatus.value = 'today';
+
+  router.get(route('all-appointments.index'), { status: 'today' }, {
+    replace: true,
+    preserveScroll: true,
+  });
+}
+
+
+
 </script>
 
 <template #actions="{row}">
     <AuthenticatedLayout>
-        <div>
-            <h1 class="text-xl font-bold mt-4 m-4">All Booked Appointments</h1>
-            <hr>
-        </div>
-  <div class="p-6 space-y-4">
+        <div class="flex justify-between items-center mt-4 m-4">
+    <h1 class="text-2xl font-bold">All Booked Appointments</h1>
+
+    <!-- Button Group -->
+    <div class="flex space-x-2">
+        <button
+        :class="[activeStatus === 'upcoming' ? 'bg-blue-600 text-white' : 'up-btns']"
+        @click="filterAppointments('upcoming')" >
+            Upcoming Appointments
+        </button>
+        <button
+        :class="[activeStatus === 'expired' ? 'bg-blue-600 text-white' : 'up-btns']"
+        @click="filterAppointments('expired')" >
+            Expired Appointments
+        </button>
+    </div>
+</div>
+<hr>
+<!-- Extended Filters -->
+<div class="flex flex-wrap justify-end gap-2 mx-4 mt-2">
+    <button
+    :class="[activeStatus === 'all' ? 'bg-green-600 text-white' : 'btn']"
+    @click="() => filterAppointments('all')"
+    >All</button>
+    <button :class="[activeStatus === 'pending' ? 'bg-green-600 text-white' : 'btn']"
+    @click="() => filterAppointments('pending')"
+     >Pending</button>
+    <button
+    :class="[activeStatus === 'confirmed' ? 'bg-green-600 text-white' : 'btn']"
+    @click="() => filterAppointments('confirmed')"
+    >Confirmed</button>
+    <button
+      :class="[activeStatus === 'declined' ? 'bg-green-600 text-white' : 'btn']"
+    @click="() => filterAppointments('declined')"
+    >Declined</button>
+    <button
+      :class="[activeStatus === 'revoked' ? 'bg-green-600 text-white' : 'btn']"
+    @click="() => filterAppointments('revoked')"
+    >Revoked</button>
+    <button
+    :class="[activeStatus === 'today' ? 'bg-green-600 text-white' : 'btn']"
+    @click="filterToday"
+    >Today</button>
+    <!-- <button @click="filterAppointments('all')" class="btn bg-green-600 text-white hover:bg-green-700">Add New</button> -->
+</div>
+
+  <div class="p-6 space-y-4 mt-4 mx-4 bg-white">
     <input
       v-model="search"
       placeholder="Search by user name"
@@ -107,6 +173,10 @@ const confirmAppointment = (id) => {
         v-if="row.status === 'pending'"
         @click="confirmAppointment(row.id)"
         class="text-sm text-green-700 hover:underline">Confirm</button>
+        <button
+        v-if="row.status === 'pending'"
+        @click="confirmAppointment(row.id)"
+        class="text-sm text-red-700 hover:underline ms-2">Decline</button>
         <button
         v-if="row.status === 'confirmed'"
         @click="openRevokeModal(row.id)"
@@ -147,3 +217,16 @@ const confirmAppointment = (id) => {
 
   </AuthenticatedLayout>
 </template>
+
+
+<style scoped>
+.btn {
+  @apply px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 text-sm;
+}
+.up-btns {
+    @apply px-4 py-2 bg-green-900 text-white rounded hover:bg-green-700
+}
+button {
+    @apply px-4 py-2 rounded;
+}
+</style>

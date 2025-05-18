@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ApplicationRequest;
 use App\Models\Application;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -44,8 +45,7 @@ class ApplicationController extends Controller
     public function store(ApplicationRequest $request)
     {
         $user = Auth::user();
-        // dd('we are here');
-//
+
     $validated = $request->validated();
     $validated['user_id'] = $request->user()?->id;
 
@@ -69,10 +69,19 @@ class ApplicationController extends Controller
 public function show(Application $application)
 {
     // dd(auth()->user()->full_name);
-    return Inertia::render('Admin,Application/Show',[
+    return Inertia::render('Tenant/Applications/Show',[
         'user' => Auth::user(),
         'application' => $application
     ]);
 }
 
+public function tenantApplication(Application $application)
+{
+      // dd(auth()->user()->full_name);
+      $application->load('user');
+      return Inertia::render('Admin/Applications/Show',[
+        'user' => Auth::user(),
+        'application' => $application
+    ]);
+}
 }

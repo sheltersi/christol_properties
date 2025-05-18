@@ -1,6 +1,6 @@
 <template>
     <AuthenticatedLayout>
-        <div class="p-6">
+        <div class="p-6 mt-4 mx-4 bg-white">
             <h1 class="text-2xl font-bold mb-4">My Appointments</h1>
 
             <div v-if="user_appointments.length" class="grid gap-4">

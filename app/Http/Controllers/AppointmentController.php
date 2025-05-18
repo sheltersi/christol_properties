@@ -31,27 +31,45 @@ class AppointmentController extends Controller
     public function allAppointments(Request $request)
     {
         $search = $request->input('search');
+        $status = $request->query('status');
+        $date = $request->query('date');
 
-        $appointments = Appointment::with('user')
-            ->when($search, fn($q) =>
-            $q->whereHas('user', fn($q) =>
-            // $q->where('first_name', 'like', "%$search%")))
-            $q->where('first_name', 'like', "%$search%")
-                ->orWhere('last_name', 'like', "%$search%")))
+
+        $appointments = Appointment::query()
+            ->when($status && $status !== 'all', function ($query) use ($status) {
+                if ($status === 'today') {
+                    $query->whereDate('preferred_date', now()->toDateString());
+                } elseif ($status === 'upcoming') {
+                    $query->whereDate('preferred_date', '>', now()->toDateString());
+                } elseif ($status === 'expired') {
+                    $query->whereDate('preferred_date', '<', now()->toDateString());
+                } else {
+                    $query->where('status', $status);
+                }
+            })
+            ->when($date, function ($query) use ($date) {
+                $query->whereDate('preferred_date', $date);
+            })
+            ->when($search, fn ($query) =>
+            $query->whereHas('user', fn ($q) =>
+                $q->where('first_name', 'like', "%$search%")
+                  ->orWhere('last_name', 'like', "%$search%")
+            )
+        )
             ->latest()
             ->paginate(10)
             ->withQueryString();
 
-        if ($request->wantsJson()) {
-            return response()->json([
-                'appointments' => $appointments,
-                'filters' => ['search' => $search],
-            ]);
-        }
+        $appointments->load('user');
+
 
         return Inertia::render('Admin/Appointments/Index', [
             'appointments' => $appointments,
-            'filters' => ['search' => $search],
+            'filters' => [
+                'search' => $search,
+                'status' => $status,
+                // 'date' => $date,
+            ],
         ]);
     }
 

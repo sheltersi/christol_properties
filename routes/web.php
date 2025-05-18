@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::get('tenants/appointments',[AppointmentController::class, 'allAppointments'])->name('all-appointments.index');
     Route::post('/appointments/{appointment}/revoke', [AppointmentController::class, 'revoke'])->name('appointments.revoke');
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('admin/applications/{application}',[ApplicationController::class, 'tenantApplication'])->name('tenant.applications');
 
 
 
