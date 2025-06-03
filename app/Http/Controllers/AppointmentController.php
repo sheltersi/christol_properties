@@ -148,4 +148,17 @@ class AppointmentController extends Controller
         return redirect()->back()->with('success', 'Appointment revoked and user notified.');
     }
 
+    public function proposeNewTime(Request $request,Appointment $appointment)
+    {
+        $request->validate([
+            'new_time' => 'required|date|after:now',
+        ]);
+
+        // You can store this as a "proposed_time" field or log somewhere
+        $appointment->proposed_time = $request->new_time;
+        $appointment->save();
+
+        return back()->with('success', 'Proposed new time successfully.');
+    }
+
 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CottageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
@@ -41,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/appointments/{appointment}/revoke', [AppointmentController::class, 'revoke'])->name('appointments.revoke');
     Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('admin/applications/{application}',[ApplicationController::class, 'tenantApplication'])->name('tenant.applications');
+    Route::post('/appointments/{appointment}/propose-time', [AppointmentController::class, 'proposeNewTime'])->name('appointments.propose-time');
+    Route::post('/applications/{application}/accept-application', [ApplicationController::class, 'accept'])->name('accept.applications');
+    Route::post('/applications/{application}/revoke-application', [ApplicationController::class, 'revoke'])->name('revoke.applications');
+    Route::post('/applications/{application}/decline-application', [ApplicationController::class, 'decline'])->name('decline.applications');
 
 
 
@@ -73,6 +78,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
 
 Route::get('/cottages', [CottageController::class, 'index'])->name('cottages.index');
+Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us.index');
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 require __DIR__.'/auth.php';
 

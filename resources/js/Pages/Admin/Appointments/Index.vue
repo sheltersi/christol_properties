@@ -92,6 +92,31 @@ function filterToday() {
   });
 }
 
+const showProposeModal = ref(false);
+const newAppointmentTime = ref('');
+const selectedAppointment = ref(null);
+
+function openProposeTimeModal(row) {
+  selectedAppointment.value = row;
+  newAppointmentTime.value = '';
+  showProposeModal.value = true;
+}
+
+function submitProposedTime() {
+  if (!selectedAppointment.value || !newAppointmentTime.value) return;
+
+  router.post(route('appointments.propose-time', selectedAppointment.value.id), {
+    new_time: newAppointmentTime.value
+  }, {
+    onSuccess: () => {
+      showProposeModal.value = false;
+      selectedAppointment.value = null;
+    },
+    onError: () => {
+      alert('Something went wrong while proposing time.');
+    }
+  });
+}
 
 
 </script>
@@ -181,7 +206,10 @@ function filterToday() {
         v-if="row.status === 'confirmed'"
         @click="openRevokeModal(row.id)"
         class="text-sm text-red-700 hover:underline">Revoke</button>
-
+        <button
+        v-if="['pending', 'declined'].includes(row.status)"
+        @click="openProposeTimeModal(row)"
+        class="text-sm text-purple-600 hover:underline ml-2">Propose New Time</button>
       </template>
     </ReusableTable>
   </div>
@@ -210,6 +238,29 @@ function filterToday() {
           :disabled="!revokeReason.trim()"
           class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
         >Revoke</button>
+      </div>
+    </div>
+  </div>
+</teleport>
+<teleport to="body">
+  <div
+    v-if="showProposeModal"
+    class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+  >
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-lg font-semibold mb-4">Propose New Appointment Time</h2>
+      <p class="mb-2 text-sm">Select a new date and time:</p>
+      <input type="datetime-local" v-model="newAppointmentTime" class="w-full border rounded px-3 py-2 mb-4" />
+      <div class="flex justify-end space-x-2">
+        <button
+          @click="showProposeModal = false"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+        >Cancel</button>
+        <button
+          @click="submitProposedTime"
+          :disabled="!newAppointmentTime"
+          class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+        >Submit</button>
       </div>
     </div>
   </div>

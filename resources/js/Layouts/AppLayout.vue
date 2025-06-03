@@ -16,7 +16,7 @@
               <Link href="/" class="nav-link">Home</Link>
               <Link href="/how-it-works" class="nav-link">How it Works</Link>
               <Link href="{{ route('application.create') }}" class="nav-link">Apply to Rent</Link>
-              <Link href="/contact" class="nav-link">Contact Us</Link>
+              <Link href="/contact-us" class="nav-link">Contact Us</Link>
               <Link href="/cottages" class="nav-link">Available Cottages</Link>
 
             </div>
@@ -51,7 +51,7 @@
             <Link href="{{ route('cottages.index') }}" class="block nav-link">Available Cottages</Link>
             <Link href="/how-it-works" class="block nav-link">How it Works</Link>
             <Link href="{{ route('application.create') }}" class="block nav-link">Apply to Rent</Link>
-            <Link href="/contact" class="block nav-link">Contact Us</Link>
+            <Link href="/contact-us" class="block nav-link">Contact Us</Link>
             <Link :href="route('login')" class="block text-sm text-gray-600 hover:text-gray-800 font-medium pt-2">
               Login
             </Link>

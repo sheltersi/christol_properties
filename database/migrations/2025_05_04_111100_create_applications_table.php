@@ -29,6 +29,7 @@ return new class extends Migration
         $table->string('landlord_contact');
         $table->string('rent_amount', 10, 2);
         $table->string('reason_leaving');
+        $table->string('revoked_reason')->nullable();
         $table->string('status')->default('pending');
         $table->boolean('agree');
         $table->timestamps();

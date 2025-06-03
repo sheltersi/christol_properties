@@ -28,7 +28,9 @@ class Application extends Model implements HasMedia
         'landlord_contact',
         'rent_amount',
         'reason_leaving',
-        'agree'
+        'agree',
+        'revoked_reason',
+        'declined_reason'
     ];
     public function user()
     {

@@ -12,6 +12,7 @@ class Appointment extends Model
         'cottage_number',
         'preferred_date',
         'preferred_time',
+        'proposed_time',
         'message',
         'status',
         'user_id'

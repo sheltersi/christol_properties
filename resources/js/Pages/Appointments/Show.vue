@@ -23,7 +23,7 @@ const backButton = () => {
       <div class="space-y-2">
         <p><strong>User:</strong> {{ appointment.user.first_name }} {{ appointment.user.last_name }}</p>
         <p><strong>Cottage No:</strong> {{ appointment.cottage_number }}</p>
-        <p><strong>Date:</strong> {{ appointment.preferred_date }}</p>
+        <p><strong>Date:</strong> {{appointment.proposed_time ? appointment.proposed_time : appointment.preferred_date }}</p>
         <p><strong>Time:</strong> {{ appointment.preferred_time }}</p>
         <p><strong>Status:</strong> {{ appointment.status }}</p>
         <p><strong>Comments:</strong> {{ appointment.comments ?? 'N/A' }}</p>

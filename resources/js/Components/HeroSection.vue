@@ -10,7 +10,7 @@
           Find Your Perfect Home
         </h1>
         <p class="text-lg md:text-xl mb-8">
-          Kristo Properties connects you with peaceful, long-term house/cottage rentals designed for comfortable living.
+          Christol Properties connects you with peaceful, long-term house/cottage rentals designed for comfortable living.
         </p>
         <Link
           href="/apply-to-rent/create"

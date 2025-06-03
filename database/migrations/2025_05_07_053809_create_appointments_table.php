@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('cottage_number');
             $table->date('preferred_date');
             $table->string('preferred_time');
+            $table->string('proposed_time')->nullable();
             $table->string('message');
             $table->enum('status',['pending', 'confirmed','declined','revoked'])->default('pending');
             $table->text('revoked_reason')->nullable();
