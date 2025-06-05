@@ -2,6 +2,7 @@
      <div class="md:ms-[100px] ms-[20px] mt-[15px]">
     <h1 class="text-2xl font-bold text-blue-950">Contact Us</h1>
     <hr class="contact-hr w-20 mb-6">
+    <p class=" pb-4">From viewing to moving — we’re with you all the way.</p>
     </div>
 
     <div class="mb-6 max-w-7xl md:mx-auto md:ps-6 flex flex-col md:flex-row gap-6 mx-[20px]">

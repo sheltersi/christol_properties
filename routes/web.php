@@ -8,6 +8,7 @@ use App\Http\Controllers\CottageController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TenantDashboardController;
+use App\Http\Controllers\WebsiteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::get('/cottages', [CottageController::class, 'index'])->name('cottages.index');
 Route::get('/contact-us', [ContactController::class, 'index'])->name('contact-us.index');
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/how-it-works', [WebsiteController::class, 'howItWorks'])->name('how-it-works');
 
 require __DIR__.'/auth.php';
 

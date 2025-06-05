@@ -8,7 +8,7 @@ import { createApp, h } from 'vue';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faFacebook, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { faAngleDown, faChevronDown, faUser } from '@fortawesome/free-solid-svg-icons'
-import { faClock, faEnvelope, faLocationDot, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faClock, faEnvelope, faLocationDot, faPhone, faSquareCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { createInertiaApp } from '@inertiajs/vue3';
 
@@ -17,7 +17,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 window.Swal = Swal;
 
 
-library.add(faUser, faChevronDown, faAngleDown,faPhone, faEnvelope, faClock, faFacebook, faInstagram, faWhatsapp, faLocationDot);
+library.add(faUser, faChevronDown, faAngleDown,faPhone, faEnvelope, faClock, faFacebook, faInstagram, faWhatsapp, faLocationDot,faSquareCheck);
 
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
