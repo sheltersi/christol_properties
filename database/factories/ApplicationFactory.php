@@ -33,7 +33,7 @@ class ApplicationFactory extends Factory
             'landlord_contact' => fake()->phoneNumber(),
             'rent_amount'=> fake()->numberBetween(7000,30000),
             'reason_leaving' => fake()->sentence(),
-            'status' => fake()->randomElement(['pending','viewed','in-progress','accepted','declined']),
+            'status' => fake()->randomElement(['pending','in-progress','accepted','declined']),
             'agree' => fake()->randomElement([0,1])
         ];
     }

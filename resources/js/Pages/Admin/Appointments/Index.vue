@@ -68,8 +68,6 @@ const confirmAppointment = (id) => {
     }
 };
 
-
-
 const activeStatus = computed(() => page.props.filters?.status ?? 'all');
 
 function filterAppointments(status){

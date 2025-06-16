@@ -4,7 +4,7 @@
   10 => 'broadcasting',
   11 => 'view',
   12 => 'cors',
-  'app' => 
+  'app' =>
   array (
     'name' => 'Laravel',
     'env' => 'local',
@@ -18,15 +18,15 @@
     'faker_locale' => 'en_US',
     'cipher' => 'AES-256-CBC',
     'key' => 'base64:S2FtVVpw+Q77hD6ww43/HWUCaG+O9JQd8KyWpwDSaNE=',
-    'previous_keys' => 
+    'previous_keys' =>
     array (
     ),
-    'maintenance' => 
+    'maintenance' =>
     array (
       'driver' => 'file',
       'store' => 'database',
     ),
-    'providers' => 
+    'providers' =>
     array (
       0 => 'Illuminate\\Auth\\AuthServiceProvider',
       1 => 'Illuminate\\Broadcasting\\BroadcastServiceProvider',
@@ -53,7 +53,7 @@
       22 => 'Illuminate\\View\\ViewServiceProvider',
       23 => 'App\\Providers\\AppServiceProvider',
     ),
-    'aliases' => 
+    'aliases' =>
     array (
       'App' => 'Illuminate\\Support\\Facades\\App',
       'Arr' => 'Illuminate\\Support\\Arr',
@@ -102,37 +102,37 @@
       'Vite' => 'Illuminate\\Support\\Facades\\Vite',
     ),
   ),
-  'auth' => 
+  'auth' =>
   array (
-    'defaults' => 
+    'defaults' =>
     array (
       'guard' => 'web',
       'passwords' => 'users',
     ),
-    'guards' => 
+    'guards' =>
     array (
-      'web' => 
+      'web' =>
       array (
         'driver' => 'session',
         'provider' => 'users',
       ),
-      'sanctum' => 
+      'sanctum' =>
       array (
         'driver' => 'sanctum',
         'provider' => NULL,
       ),
     ),
-    'providers' => 
+    'providers' =>
     array (
-      'users' => 
+      'users' =>
       array (
         'driver' => 'eloquent',
         'model' => 'App\\Models\\User',
       ),
     ),
-    'passwords' => 
+    'passwords' =>
     array (
-      'users' => 
+      'users' =>
       array (
         'provider' => 'users',
         'table' => 'password_reset_tokens',
@@ -142,17 +142,17 @@
     ),
     'password_timeout' => 10800,
   ),
-  'cache' => 
+  'cache' =>
   array (
     'default' => 'database',
-    'stores' => 
+    'stores' =>
     array (
-      'array' => 
+      'array' =>
       array (
         'driver' => 'array',
         'serialize' => false,
       ),
-      'database' => 
+      'database' =>
       array (
         'driver' => 'database',
         'connection' => NULL,
@@ -160,27 +160,27 @@
         'lock_connection' => NULL,
         'lock_table' => NULL,
       ),
-      'file' => 
+      'file' =>
       array (
         'driver' => 'file',
         'path' => '/Users/racvert/Code/Code2/example-app/storage/framework/cache/data',
         'lock_path' => '/Users/racvert/Code/Code2/example-app/storage/framework/cache/data',
       ),
-      'memcached' => 
+      'memcached' =>
       array (
         'driver' => 'memcached',
         'persistent_id' => NULL,
-        'sasl' => 
+        'sasl' =>
         array (
           0 => NULL,
           1 => NULL,
         ),
-        'options' => 
+        'options' =>
         array (
         ),
-        'servers' => 
+        'servers' =>
         array (
-          0 => 
+          0 =>
           array (
             'host' => '127.0.0.1',
             'port' => 11211,
@@ -188,13 +188,13 @@
           ),
         ),
       ),
-      'redis' => 
+      'redis' =>
       array (
         'driver' => 'redis',
         'connection' => 'cache',
         'lock_connection' => 'default',
       ),
-      'dynamodb' => 
+      'dynamodb' =>
       array (
         'driver' => 'dynamodb',
         'key' => '',
@@ -203,19 +203,19 @@
         'table' => 'cache',
         'endpoint' => NULL,
       ),
-      'octane' => 
+      'octane' =>
       array (
         'driver' => 'octane',
       ),
     ),
     'prefix' => 'laravel_cache_',
   ),
-  'database' => 
+  'database' =>
   array (
     'default' => 'mysql',
-    'connections' => 
+    'connections' =>
     array (
-      'sqlite' => 
+      'sqlite' =>
       array (
         'driver' => 'sqlite',
         'url' => NULL,
@@ -226,7 +226,7 @@
         'journal_mode' => NULL,
         'synchronous' => NULL,
       ),
-      'mysql' => 
+      'mysql' =>
       array (
         'driver' => 'mysql',
         'url' => NULL,
@@ -242,11 +242,11 @@
         'prefix_indexes' => true,
         'strict' => true,
         'engine' => NULL,
-        'options' => 
+        'options' =>
         array (
         ),
       ),
-      'mariadb' => 
+      'mariadb' =>
       array (
         'driver' => 'mariadb',
         'url' => NULL,
@@ -262,11 +262,11 @@
         'prefix_indexes' => true,
         'strict' => true,
         'engine' => NULL,
-        'options' => 
+        'options' =>
         array (
         ),
       ),
-      'pgsql' => 
+      'pgsql' =>
       array (
         'driver' => 'pgsql',
         'url' => NULL,
@@ -281,7 +281,7 @@
         'search_path' => 'public',
         'sslmode' => 'prefer',
       ),
-      'sqlsrv' => 
+      'sqlsrv' =>
       array (
         'driver' => 'sqlsrv',
         'url' => NULL,
@@ -295,21 +295,21 @@
         'prefix_indexes' => true,
       ),
     ),
-    'migrations' => 
+    'migrations' =>
     array (
       'table' => 'migrations',
       'update_date_on_publish' => true,
     ),
-    'redis' => 
+    'redis' =>
     array (
       'client' => 'phpredis',
-      'options' => 
+      'options' =>
       array (
         'cluster' => 'redis',
         'prefix' => 'laravel_database_',
         'persistent' => false,
       ),
-      'default' => 
+      'default' =>
       array (
         'url' => NULL,
         'host' => '127.0.0.1',
@@ -318,7 +318,7 @@
         'port' => '6379',
         'database' => '0',
       ),
-      'cache' => 
+      'cache' =>
       array (
         'url' => NULL,
         'host' => '127.0.0.1',
@@ -329,12 +329,12 @@
       ),
     ),
   ),
-  'filesystems' => 
+  'filesystems' =>
   array (
     'default' => 'local',
-    'disks' => 
+    'disks' =>
     array (
-      'local' => 
+      'local' =>
       array (
         'driver' => 'local',
         'root' => '/Users/racvert/Code/Code2/example-app/storage/app/private',
@@ -342,7 +342,7 @@
         'throw' => false,
         'report' => false,
       ),
-      'public' => 
+      'public' =>
       array (
         'driver' => 'local',
         'root' => '/Users/racvert/Code/Code2/example-app/storage/app/public',
@@ -351,7 +351,7 @@
         'throw' => false,
         'report' => false,
       ),
-      's3' => 
+      's3' =>
       array (
         'driver' => 's3',
         'key' => '',
@@ -365,38 +365,38 @@
         'report' => false,
       ),
     ),
-    'links' => 
+    'links' =>
     array (
       '/Users/racvert/Code/Code2/example-app/public/storage' => '/Users/racvert/Code/Code2/example-app/storage/app/public',
     ),
   ),
-  'logging' => 
+  'logging' =>
   array (
     'default' => 'stack',
-    'deprecations' => 
+    'deprecations' =>
     array (
       'channel' => NULL,
       'trace' => false,
     ),
-    'channels' => 
+    'channels' =>
     array (
-      'stack' => 
+      'stack' =>
       array (
         'driver' => 'stack',
-        'channels' => 
+        'channels' =>
         array (
           0 => 'single',
         ),
         'ignore_exceptions' => false,
       ),
-      'single' => 
+      'single' =>
       array (
         'driver' => 'single',
         'path' => '/Users/racvert/Code/Code2/example-app/storage/logs/laravel.log',
         'level' => 'debug',
         'replace_placeholders' => true,
       ),
-      'daily' => 
+      'daily' =>
       array (
         'driver' => 'daily',
         'path' => '/Users/racvert/Code/Code2/example-app/storage/logs/laravel.log',
@@ -404,7 +404,7 @@
         'days' => 14,
         'replace_placeholders' => true,
       ),
-      'slack' => 
+      'slack' =>
       array (
         'driver' => 'slack',
         'url' => NULL,
@@ -413,67 +413,67 @@
         'level' => 'debug',
         'replace_placeholders' => true,
       ),
-      'papertrail' => 
+      'papertrail' =>
       array (
         'driver' => 'monolog',
         'level' => 'debug',
         'handler' => 'Monolog\\Handler\\SyslogUdpHandler',
-        'handler_with' => 
+        'handler_with' =>
         array (
           'host' => NULL,
           'port' => NULL,
           'connectionString' => 'tls://:',
         ),
-        'processors' => 
+        'processors' =>
         array (
           0 => 'Monolog\\Processor\\PsrLogMessageProcessor',
         ),
       ),
-      'stderr' => 
+      'stderr' =>
       array (
         'driver' => 'monolog',
         'level' => 'debug',
         'handler' => 'Monolog\\Handler\\StreamHandler',
-        'handler_with' => 
+        'handler_with' =>
         array (
           'stream' => 'php://stderr',
         ),
         'formatter' => NULL,
-        'processors' => 
+        'processors' =>
         array (
           0 => 'Monolog\\Processor\\PsrLogMessageProcessor',
         ),
       ),
-      'syslog' => 
+      'syslog' =>
       array (
         'driver' => 'syslog',
         'level' => 'debug',
         'facility' => 8,
         'replace_placeholders' => true,
       ),
-      'errorlog' => 
+      'errorlog' =>
       array (
         'driver' => 'errorlog',
         'level' => 'debug',
         'replace_placeholders' => true,
       ),
-      'null' => 
+      'null' =>
       array (
         'driver' => 'monolog',
         'handler' => 'Monolog\\Handler\\NullHandler',
       ),
-      'emergency' => 
+      'emergency' =>
       array (
         'path' => '/Users/racvert/Code/Code2/example-app/storage/logs/laravel.log',
       ),
     ),
   ),
-  'mail' => 
+  'mail' =>
   array (
     'default' => 'smtp',
-    'mailers' => 
+    'mailers' =>
     array (
-      'smtp' => 
+      'smtp' =>
       array (
         'transport' => 'smtp',
         'scheme' => NULL,
@@ -485,46 +485,46 @@
         'timeout' => NULL,
         'local_domain' => 'example-app.test',
       ),
-      'ses' => 
+      'ses' =>
       array (
         'transport' => 'ses',
       ),
-      'postmark' => 
+      'postmark' =>
       array (
         'transport' => 'postmark',
       ),
-      'resend' => 
+      'resend' =>
       array (
         'transport' => 'resend',
       ),
-      'sendmail' => 
+      'sendmail' =>
       array (
         'transport' => 'sendmail',
         'path' => '/usr/sbin/sendmail -bs -i',
       ),
-      'log' => 
+      'log' =>
       array (
         'transport' => 'log',
         'channel' => NULL,
       ),
-      'array' => 
+      'array' =>
       array (
         'transport' => 'array',
       ),
-      'failover' => 
+      'failover' =>
       array (
         'transport' => 'failover',
-        'mailers' => 
+        'mailers' =>
         array (
           0 => 'smtp',
           1 => 'log',
         ),
         'retry_after' => 60,
       ),
-      'roundrobin' => 
+      'roundrobin' =>
       array (
         'transport' => 'roundrobin',
-        'mailers' => 
+        'mailers' =>
         array (
           0 => 'ses',
           1 => 'postmark',
@@ -532,30 +532,30 @@
         'retry_after' => 60,
       ),
     ),
-    'from' => 
+    'from' =>
     array (
       'address' => 'hello@example.com',
       'name' => 'Laravel',
     ),
-    'markdown' => 
+    'markdown' =>
     array (
       'theme' => 'default',
-      'paths' => 
+      'paths' =>
       array (
         0 => '/Users/racvert/Code/Code2/example-app/resources/views/vendor/mail',
       ),
     ),
   ),
-  'queue' => 
+  'queue' =>
   array (
     'default' => 'database',
-    'connections' => 
+    'connections' =>
     array (
-      'sync' => 
+      'sync' =>
       array (
         'driver' => 'sync',
       ),
-      'database' => 
+      'database' =>
       array (
         'driver' => 'database',
         'connection' => NULL,
@@ -564,7 +564,7 @@
         'retry_after' => 90,
         'after_commit' => false,
       ),
-      'beanstalkd' => 
+      'beanstalkd' =>
       array (
         'driver' => 'beanstalkd',
         'host' => 'localhost',
@@ -573,7 +573,7 @@
         'block_for' => 0,
         'after_commit' => false,
       ),
-      'sqs' => 
+      'sqs' =>
       array (
         'driver' => 'sqs',
         'key' => '',
@@ -584,7 +584,7 @@
         'region' => 'us-east-1',
         'after_commit' => false,
       ),
-      'redis' => 
+      'redis' =>
       array (
         'driver' => 'redis',
         'connection' => 'default',
@@ -594,44 +594,44 @@
         'after_commit' => false,
       ),
     ),
-    'batching' => 
+    'batching' =>
     array (
       'database' => 'mysql',
       'table' => 'job_batches',
     ),
-    'failed' => 
+    'failed' =>
     array (
       'driver' => 'database-uuids',
       'database' => 'mysql',
       'table' => 'failed_jobs',
     ),
   ),
-  'services' => 
+  'services' =>
   array (
-    'postmark' => 
+    'postmark' =>
     array (
       'token' => NULL,
     ),
-    'ses' => 
+    'ses' =>
     array (
       'key' => '',
       'secret' => '',
       'region' => 'us-east-1',
     ),
-    'resend' => 
+    'resend' =>
     array (
       'key' => NULL,
     ),
-    'slack' => 
+    'slack' =>
     array (
-      'notifications' => 
+      'notifications' =>
       array (
         'bot_user_oauth_token' => NULL,
         'channel' => NULL,
       ),
     ),
   ),
-  'session' => 
+  'session' =>
   array (
     'driver' => 'database',
     'lifetime' => 120,
@@ -641,7 +641,7 @@
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
-    'lottery' => 
+    'lottery' =>
     array (
       0 => 2,
       1 => 100,
@@ -654,16 +654,16 @@
     'same_site' => 'lax',
     'partitioned' => false,
   ),
-  'hashing' => 
+  'hashing' =>
   array (
     'driver' => 'bcrypt',
-    'bcrypt' => 
+    'bcrypt' =>
     array (
       'rounds' => '12',
       'verify' => true,
       'limit' => NULL,
     ),
-    'argon' => 
+    'argon' =>
     array (
       'memory' => 65536,
       'threads' => 1,
@@ -672,39 +672,39 @@
     ),
     'rehash_on_login' => true,
   ),
-  'concurrency' => 
+  'concurrency' =>
   array (
     'default' => 'process',
   ),
-  'broadcasting' => 
+  'broadcasting' =>
   array (
     'default' => 'log',
-    'connections' => 
+    'connections' =>
     array (
-      'reverb' => 
+      'reverb' =>
       array (
         'driver' => 'reverb',
         'key' => NULL,
         'secret' => NULL,
         'app_id' => NULL,
-        'options' => 
+        'options' =>
         array (
           'host' => NULL,
           'port' => 443,
           'scheme' => 'https',
           'useTLS' => true,
         ),
-        'client_options' => 
+        'client_options' =>
         array (
         ),
       ),
-      'pusher' => 
+      'pusher' =>
       array (
         'driver' => 'pusher',
         'key' => '3f0e6eac75465abe8cb3',
         'secret' => '203cf763c8d5a5970531',
         'app_id' => '1989842',
-        'options' => 
+        'options' =>
         array (
           'cluster' => 'mt1',
           'host' => 'api-mt1.pusher.com',
@@ -713,71 +713,71 @@
           'encrypted' => true,
           'useTLS' => true,
         ),
-        'client_options' => 
+        'client_options' =>
         array (
         ),
       ),
-      'ably' => 
+      'ably' =>
       array (
         'driver' => 'ably',
         'key' => NULL,
       ),
-      'log' => 
+      'log' =>
       array (
         'driver' => 'log',
       ),
-      'null' => 
+      'null' =>
       array (
         'driver' => 'null',
       ),
     ),
   ),
-  'view' => 
+  'view' =>
   array (
-    'paths' => 
+    'paths' =>
     array (
       0 => '/Users/racvert/Code/Code2/example-app/resources/views',
     ),
     'compiled' => '/Users/racvert/Code/Code2/example-app/storage/framework/views',
   ),
-  'cors' => 
+  'cors' =>
   array (
-    'paths' => 
+    'paths' =>
     array (
       0 => 'api/*',
       1 => 'sanctum/csrf-cookie',
     ),
-    'allowed_methods' => 
+    'allowed_methods' =>
     array (
       0 => '*',
     ),
-    'allowed_origins' => 
+    'allowed_origins' =>
     array (
       0 => '*',
     ),
-    'allowed_origins_patterns' => 
+    'allowed_origins_patterns' =>
     array (
     ),
-    'allowed_headers' => 
+    'allowed_headers' =>
     array (
       0 => '*',
     ),
-    'exposed_headers' => 
+    'exposed_headers' =>
     array (
     ),
     'max_age' => 0,
     'supports_credentials' => false,
   ),
-  'debugbar' => 
+  'debugbar' =>
   array (
     'enabled' => NULL,
     'hide_empty_tabs' => true,
-    'except' => 
+    'except' =>
     array (
       0 => 'telescope*',
       1 => 'horizon*',
     ),
-    'storage' => 
+    'storage' =>
     array (
       'enabled' => true,
       'open' => NULL,
@@ -799,7 +799,7 @@
     'defer_datasets' => false,
     'error_handler' => false,
     'clockwork' => false,
-    'collectors' => 
+    'collectors' =>
     array (
       'phpinfo' => false,
       'messages' => true,
@@ -827,41 +827,41 @@
       'jobs' => false,
       'pennant' => false,
     ),
-    'options' => 
+    'options' =>
     array (
-      'time' => 
+      'time' =>
       array (
         'memory_usage' => false,
       ),
-      'messages' => 
+      'messages' =>
       array (
         'trace' => true,
         'capture_dumps' => false,
       ),
-      'memory' => 
+      'memory' =>
       array (
         'reset_peak' => false,
         'with_baseline' => false,
         'precision' => 0,
       ),
-      'auth' => 
+      'auth' =>
       array (
         'show_name' => true,
         'show_guards' => true,
       ),
-      'db' => 
+      'db' =>
       array (
         'with_params' => true,
-        'exclude_paths' => 
+        'exclude_paths' =>
         array (
         ),
         'backtrace' => true,
-        'backtrace_exclude_paths' => 
+        'backtrace_exclude_paths' =>
         array (
         ),
         'timeline' => false,
         'duration_background' => true,
-        'explain' => 
+        'explain' =>
         array (
           'enabled' => false,
         ),
@@ -872,75 +872,75 @@
         'soft_limit' => 100,
         'hard_limit' => 500,
       ),
-      'mail' => 
+      'mail' =>
       array (
         'timeline' => true,
         'show_body' => true,
       ),
-      'views' => 
+      'views' =>
       array (
         'timeline' => true,
         'data' => false,
         'group' => 50,
-        'exclude_paths' => 
+        'exclude_paths' =>
         array (
           0 => 'vendor/filament',
         ),
       ),
-      'route' => 
+      'route' =>
       array (
         'label' => true,
       ),
-      'session' => 
+      'session' =>
       array (
-        'hiddens' => 
+        'hiddens' =>
         array (
         ),
       ),
-      'symfony_request' => 
+      'symfony_request' =>
       array (
         'label' => true,
-        'hiddens' => 
+        'hiddens' =>
         array (
         ),
       ),
-      'events' => 
+      'events' =>
       array (
         'data' => false,
       ),
-      'logs' => 
+      'logs' =>
       array (
         'file' => NULL,
       ),
-      'cache' => 
+      'cache' =>
       array (
         'values' => true,
       ),
     ),
     'inject' => true,
     'route_prefix' => '_debugbar',
-    'route_middleware' => 
+    'route_middleware' =>
     array (
     ),
     'route_domain' => NULL,
     'theme' => 'auto',
     'debug_backtrace_limit' => 50,
   ),
-  'inertia' => 
+  'inertia' =>
   array (
-    'ssr' => 
+    'ssr' =>
     array (
       'enabled' => true,
       'url' => 'http://127.0.0.1:13714',
     ),
-    'testing' => 
+    'testing' =>
     array (
       'ensure_pages_exist' => true,
-      'page_paths' => 
+      'page_paths' =>
       array (
         0 => '/Users/racvert/Code/Code2/example-app/resources/js/Pages',
       ),
-      'page_extensions' => 
+      'page_extensions' =>
       array (
         0 => 'js',
         1 => 'jsx',
@@ -950,14 +950,14 @@
         5 => 'vue',
       ),
     ),
-    'history' => 
+    'history' =>
     array (
       'encrypt' => false,
     ),
   ),
-  'sanctum' => 
+  'sanctum' =>
   array (
-    'stateful' => 
+    'stateful' =>
     array (
       0 => 'localhost',
       1 => 'localhost:3000',
@@ -966,20 +966,20 @@
       4 => '::1',
       5 => 'example-app.test',
     ),
-    'guard' => 
+    'guard' =>
     array (
       0 => 'web',
     ),
     'expiration' => NULL,
     'token_prefix' => '',
-    'middleware' => 
+    'middleware' =>
     array (
       'authenticate_session' => 'Laravel\\Sanctum\\Http\\Middleware\\AuthenticateSession',
       'encrypt_cookies' => 'Illuminate\\Cookie\\Middleware\\EncryptCookies',
       'validate_csrf_token' => 'Illuminate\\Foundation\\Http\\Middleware\\ValidateCsrfToken',
     ),
   ),
-  'media-library' => 
+  'media-library' =>
   array (
     'disk_name' => 'public',
     'max_file_size' => 10485760,
@@ -996,48 +996,48 @@
     'file_namer' => 'Spatie\\MediaLibrary\\Support\\FileNamer\\DefaultFileNamer',
     'path_generator' => 'Spatie\\MediaLibrary\\Support\\PathGenerator\\DefaultPathGenerator',
     'file_remover_class' => 'Spatie\\MediaLibrary\\Support\\FileRemover\\DefaultFileRemover',
-    'custom_path_generators' => 
+    'custom_path_generators' =>
     array (
     ),
     'url_generator' => 'Spatie\\MediaLibrary\\Support\\UrlGenerator\\DefaultUrlGenerator',
     'moves_media_on_update' => false,
     'version_urls' => false,
-    'image_optimizers' => 
+    'image_optimizers' =>
     array (
-      'Spatie\\ImageOptimizer\\Optimizers\\Jpegoptim' => 
+      'Spatie\\ImageOptimizer\\Optimizers\\Jpegoptim' =>
       array (
         0 => '-m85',
         1 => '--force',
         2 => '--strip-all',
         3 => '--all-progressive',
       ),
-      'Spatie\\ImageOptimizer\\Optimizers\\Pngquant' => 
+      'Spatie\\ImageOptimizer\\Optimizers\\Pngquant' =>
       array (
         0 => '--force',
       ),
-      'Spatie\\ImageOptimizer\\Optimizers\\Optipng' => 
+      'Spatie\\ImageOptimizer\\Optimizers\\Optipng' =>
       array (
         0 => '-i0',
         1 => '-o2',
         2 => '-quiet',
       ),
-      'Spatie\\ImageOptimizer\\Optimizers\\Svgo' => 
+      'Spatie\\ImageOptimizer\\Optimizers\\Svgo' =>
       array (
         0 => '--disable=cleanupIDs',
       ),
-      'Spatie\\ImageOptimizer\\Optimizers\\Gifsicle' => 
+      'Spatie\\ImageOptimizer\\Optimizers\\Gifsicle' =>
       array (
         0 => '-b',
         1 => '-O3',
       ),
-      'Spatie\\ImageOptimizer\\Optimizers\\Cwebp' => 
+      'Spatie\\ImageOptimizer\\Optimizers\\Cwebp' =>
       array (
         0 => '-m 6',
         1 => '-pass 10',
         2 => '-mt',
         3 => '-q 90',
       ),
-      'Spatie\\ImageOptimizer\\Optimizers\\Avifenc' => 
+      'Spatie\\ImageOptimizer\\Optimizers\\Avifenc' =>
       array (
         0 => '-a cq-level=23',
         1 => '-j all',
@@ -1049,7 +1049,7 @@
         7 => '-a tune=ssim',
       ),
     ),
-    'image_generators' => 
+    'image_generators' =>
     array (
       0 => 'Spatie\\MediaLibrary\\Conversions\\ImageGenerators\\Image',
       1 => 'Spatie\\MediaLibrary\\Conversions\\ImageGenerators\\Webp',
@@ -1062,21 +1062,21 @@
     'image_driver' => 'gd',
     'ffmpeg_path' => '/usr/bin/ffmpeg',
     'ffprobe_path' => '/usr/bin/ffprobe',
-    'jobs' => 
+    'jobs' =>
     array (
       'perform_conversions' => 'Spatie\\MediaLibrary\\Conversions\\Jobs\\PerformConversionsJob',
       'generate_responsive_images' => 'Spatie\\MediaLibrary\\ResponsiveImages\\Jobs\\GenerateResponsiveImagesJob',
     ),
     'media_downloader' => 'Spatie\\MediaLibrary\\Downloaders\\DefaultDownloader',
     'media_downloader_ssl' => true,
-    'remote' => 
+    'remote' =>
     array (
-      'extra_headers' => 
+      'extra_headers' =>
       array (
         'CacheControl' => 'max-age=604800',
       ),
     ),
-    'responsive_images' => 
+    'responsive_images' =>
     array (
       'width_calculator' => 'Spatie\\MediaLibrary\\ResponsiveImages\\WidthCalculator\\FileSizeOptimizedWidthCalculator',
       'use_tiny_placeholders' => true,
@@ -1087,15 +1087,15 @@
     'prefix' => '',
     'force_lazy_loading' => true,
   ),
-  'tinker' => 
+  'tinker' =>
   array (
-    'commands' => 
+    'commands' =>
     array (
     ),
-    'alias' => 
+    'alias' =>
     array (
     ),
-    'dont_alias' => 
+    'dont_alias' =>
     array (
       0 => 'App\\Nova',
     ),

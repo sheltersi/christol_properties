@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/applications/{application}/accept-application', [ApplicationController::class, 'accept'])->name('accept.applications');
     Route::post('/applications/{application}/revoke-application', [ApplicationController::class, 'revoke'])->name('revoke.applications');
     Route::post('/applications/{application}/decline-application', [ApplicationController::class, 'decline'])->name('decline.applications');
+    // applications routes
+    Route::get('tenants/applications',[ApplicationController::class, 'allApplications'])->name('all-applications.index');
 
 
 

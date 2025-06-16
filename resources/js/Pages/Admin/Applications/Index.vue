@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
 import ReusableTable from '@/Components/Table.vue';
 import { debounce } from 'lodash'
@@ -26,41 +27,41 @@ const selectedApplicationId = ref(null)
 const selectedAppId = ref(null)
 
 const submitRevocation = (reason) => {
-  router.post(
-    route('revoke.applications', selectedApplicationId.value),
-    { reason },
-    {
-      preserveState: true,
-      preserveScroll: true,
-      onSuccess: () => {
-        showRevokeModal.value = false
-      },
-    }
-  )
+    router.post(
+        route('revoke.applications', selectedApplicationId.value),
+        { reason },
+        {
+            preserveState: true,
+            preserveScroll: true,
+            onSuccess: () => {
+                showRevokeModal.value = false
+            },
+        }
+    )
 }
 
 const openModal = (modalType, id) => {
-  if (modalType === 'decline') {
-    selectedAppId.value = id;
-    showDeclineModal.value = true;
-  } else if (modalType === 'revoke') {
-    selectedApplicationId.value = id;
-    showRevokeModal.value = true;
-  }
+    if (modalType === 'decline') {
+        selectedAppId.value = id;
+        showDeclineModal.value = true;
+    } else if (modalType === 'revoke') {
+        selectedApplicationId.value = id;
+        showRevokeModal.value = true;
+    }
 };
 
 const submitDeclination = (reason) => {
-  router.post(
-    route('decline.applications', selectedAppId.value),
-    { reason },
-    {
-      preserveState: true,
-      preserveScroll: true,
-      onSuccess: () => {
-        showDeclineModal.value = false
-      },
-    }
-  )
+    router.post(
+        route('decline.applications', selectedAppId.value),
+        { reason },
+        {
+            preserveState: true,
+            preserveScroll: true,
+            onSuccess: () => {
+                showDeclineModal.value = false
+            },
+        }
+    )
 };
 
 const search = ref(props.filters.search || '');
@@ -96,6 +97,17 @@ const revokeApplication = (id) => {
     router.post(route('revoke.applications', id));
 };
 
+const activeStatus = computed(() => page.props.filters?.status ?? 'all');
+function filterAppointments(status){
+    activeStatus.value = status;
+
+    router.get(route('all-applications.index'),{status},{
+        replace: true,
+        preserveScroll: true,
+        // preserveState: true,
+    });
+}
+
 
 </script>
 
@@ -108,6 +120,23 @@ const revokeApplication = (id) => {
                 <h1 class="text-xl font-bold mt-4 m-4">All Submitted Applications</h1>
                 <hr>
             </div>
+
+            <!-- Extended Filters -->
+            <div class="flex flex-wrap justify-end gap-2 mx-4 mt-2">
+                <button :class="[activeStatus === 'all' ? 'bg-green-600 text-white' : 'btn']"
+                    @click="() => filterAppointments('all')">All</button>
+                <button :class="[activeStatus === 'pending' ? 'bg-green-600 text-white' : 'btn']"
+                    @click="() => filterAppointments('pending')">Pending</button>
+                <button :class="[activeStatus === 'accepted' ? 'bg-green-600 text-white' : 'btn']"
+                    @click="() => filterAppointments('accepted')">Accepted</button>
+                <button :class="[activeStatus === 'in-progress' ? 'bg-green-600 text-white' : 'btn']"
+                    @click="() => filterAppointments('in-progress')">In-progress</button>
+                <button :class="[activeStatus === 'declined' ? 'bg-green-600 text-white' : 'btn']"
+                    @click="() => filterAppointments('declined')">Declined</button>
+                <button :class="[activeStatus === 'revoked' ? 'bg-green-600 text-white' : 'btn']"
+                    @click="() => filterAppointments('revoked')">Revoked</button>
+            </div>
+
             <input v-model="search" placeholder="Search by user name"
                 class="border px-2 py-1 rounded w-full max-w-sm" />
 
@@ -135,13 +164,22 @@ const revokeApplication = (id) => {
                             </button>
                         </template>
                         <template #content>
-                            <DropdownLink @click="viewApplication(row.id)">View</DropdownLink>
-                            <DropdownLink @click="acceptApplication(row.id)" v-if="row.status === 'pending'">Accept
+                            <!-- v-if="['pending', 'in-progress'].includes(row.status)" -->
+                            <DropdownLink @click="viewApplication(row.id)"
+                            class="text-sm text-blue-500 hover:underline">
+                                View</DropdownLink>
+                            <DropdownLink @click="acceptApplication(row.id)" v-if="['pending','in-progress'].includes(row.status)"
+                            class="text-sm text-green-600 hover:underline">
+                                Accept
+                            </DropdownLink>
+                            <DropdownLink @click="creditCheck(row.id)" v-if="['pending','in-progress'].includes(row.status)"
+                            class="text-sm text-green-600 hover:underline">
+                                Credit check
                             </DropdownLink>
                             <DropdownLink @click="openModal('decline', row.id)" v-if="row.status === 'pending'"
                                 class="text-sm text-red-700 hover:underline">Decline
                             </DropdownLink>
-                            <DropdownLink @click="openModal('revoke', row.id)" v-if="row.status === 'accepted'"
+                            <DropdownLink @click="openModal('revoke', row.id)" v-if="['declined'].includes(row.status)"
                                 class="text-sm text-red-700 hover:underline">Revoke</DropdownLink>
 
                         </template>
@@ -149,19 +187,17 @@ const revokeApplication = (id) => {
                 </template>
             </ReusableTable>
         </div>
-<ReasonModal
-  v-model="showDeclineModal"
-  title="Decline Application"
-  description="Please provide a reason for declining this application:"
-  submit-label="Decline"
-  @submit="submitDeclination"
-/>
-<ReasonModal
-  v-model="showRevokeModal"
-  title="Revoke Application"
-  description="Please provide a reason for revoking this application:"
-  submit-label="Revoke"
-  @submit="submitRevocation"
-/>
+        <ReasonModal v-model="showDeclineModal" title="Decline Application"
+            description="Please provide a reason for declining this application:" submit-label="Decline"
+            @submit="submitDeclination" />
+        <ReasonModal v-model="showRevokeModal" title="Revoke Application"
+            description="Please provide a reason for revoking this application:" submit-label="Revoke"
+            @submit="submitRevocation" />
     </AuthenticatedLayout>
 </template>
+
+<style scoped>
+.btn {
+  @apply px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 text-sm;
+}
+</style>

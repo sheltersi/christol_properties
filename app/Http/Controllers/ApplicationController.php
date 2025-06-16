@@ -35,6 +35,40 @@ class ApplicationController extends Controller
         ]);
     }
 
+     public function allApplications(Request $request)
+    {
+        $search = $request->input('search');
+        $status = $request->query('status');
+        $date = $request->query('date');
+
+
+        $appointments = Application::query()
+            ->when($status && $status !== 'all', function ($query) use ($status) {
+                    $query->where('status', $status);
+            })
+            ->when($search, fn ($query) =>
+            $query->whereHas('user', fn ($q) =>
+                $q->where('first_name', 'like', "%$search%")
+                  ->orWhere('last_name', 'like', "%$search%")
+            )
+        )
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
+        $appointments->load('user');
+
+
+        return Inertia::render('Admin/Applications/Index', [
+            'appointments' => $appointments,
+            'filters' => [
+                'search' => $search,
+                'status' => $status,
+                // 'date' => $date,
+            ],
+        ]);
+    }
+
 
     public function create()
     {

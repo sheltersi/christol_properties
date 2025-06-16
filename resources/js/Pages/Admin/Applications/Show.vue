@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps({
-  application: Object,
+    application: Object,
 });
 
 const backButton = () => {
@@ -14,72 +14,89 @@ const backButton = () => {
 
 <template>
     <AuthenticatedLayout>
-      <div class="p-6 mt-4 mx-4">
-        <h2 class="text-3xl font-semibold mb-4">
-          {{ application.user.first_name }}'s Tenant Application
-        </h2>
+        <div class="p-6 mt-4 mx-4">
+            <h2 class="text-3xl font-semibold mb-4">
+                {{ application.user.first_name }}'s Tenant Application
+            </h2>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm border">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm border">
 
-          <!-- Personal Info -->
-          <div>
-            <h3 class="text-lg font-semibold mb-2 text-gray-700">Personal Information</h3>
-            <ul class="text-sm text-gray-600 space-y-1">
-              <li><span class="font-medium text-gray-800">Full Name:</span> {{ application.user.first_name }} {{ application.user.last_name }}</li>
-              <li><span class="font-medium text-gray-800">Phone Number:</span> {{ application.phone }}</li>
-              <li><span class="font-medium text-gray-800">Date of Birth:</span> {{ application.dob }}</li>
-              <li><span class="font-medium text-gray-800">ID / Passport:</span> {{ application.id_number }}</li>
-              <li><span class="font-medium text-gray-800">Current Address:</span> {{ application.current_address }}</li>
-              <li><span class="font-medium text-gray-800">Occupants:</span> {{ application.occupants ?? 'N/A' }}</li>
-              <li><span class="font-medium text-gray-800">Pets:</span> {{ application.pets ?? 'N/A' }}</li>
-            </ul>
-          </div>
+                <!-- Personal Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-700">Personal Information</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li><span class="font-medium text-gray-800">Full Name:</span> {{ application.user.first_name }}
+                            {{ application.user.last_name }}</li>
+                        <li><span class="font-medium text-gray-800">Phone Number:</span> {{ application.phone }}</li>
+                        <li><span class="font-medium text-gray-800">Date of Birth:</span> {{ application.dob }}</li>
+                        <li><span class="font-medium text-gray-800">ID / Passport:</span> {{ application.id_number }}
+                        </li>
+                        <li><span class="font-medium text-gray-800">Current Address:</span> {{
+                            application.current_address }}</li>
+                        <li><span class="font-medium text-gray-800">Occupants:</span> {{ application.occupants ?? 'N/A'
+                            }}</li>
+                        <li><span class="font-medium text-gray-800">Pets:</span> {{ application.pets ?? 'N/A' }}</li>
+                    </ul>
+                </div>
 
-          <!-- Employment Info -->
-          <div>
-            <h3 class="text-lg font-semibold mb-2 text-gray-700">Employment Details</h3>
-            <ul class="text-sm text-gray-600 space-y-1">
-              <li><span class="font-medium text-gray-800">Employer:</span> {{ application.employer ?? 'N/A' }}</li>
-              <li><span class="font-medium text-gray-800">Job Title:</span> {{ application.job_title ?? 'N/A' }}</li>
-              <li><span class="font-medium text-gray-800">Start Date:</span> {{ application.employment_start ?? 'N/A' }}</li>
-              <li><span class="font-medium text-gray-800">Monthly Income:</span> {{ application.monthly_income ?? 'N/A' }}</li>
-              <li><span class="font-medium text-gray-800">Employer Contact:</span> {{ application.employer_contact ?? 'N/A' }}</li>
-            </ul>
-          </div>
+                <!-- Employment Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-700">Employment Details</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li><span class="font-medium text-gray-800">Employer:</span> {{ application.employer ?? 'N/A' }}
+                        </li>
+                        <li><span class="font-medium text-gray-800">Job Title:</span> {{ application.job_title ?? 'N/A'
+                            }}</li>
+                        <li><span class="font-medium text-gray-800">Start Date:</span> {{ application.employment_start
+                            ?? 'N/A' }}</li>
+                        <li><span class="font-medium text-gray-800">Monthly Income:</span> {{ application.monthly_income
+                            ?? 'N/A' }}</li>
+                        <li><span class="font-medium text-gray-800">Employer Contact:</span> {{
+                            application.employer_contact ?? 'N/A' }}</li>
+                    </ul>
+                </div>
 
-          <!-- Rental Info -->
-          <div>
-            <h3 class="text-lg font-semibold mb-2 text-gray-700">Rental History</h3>
-            <ul class="text-sm text-gray-600 space-y-1">
-              <li><span class="font-medium text-gray-800">Landlord Name:</span> {{ application.landlord_name ?? 'N/A' }}</li>
-              <li><span class="font-medium text-gray-800">Landlord Contact:</span> {{ application.landlord_contact ?? 'N/A' }}</li>
-              <li><span class="font-medium text-gray-800">Rent Amount:</span> {{ application.rent_amount ?? 'N/A' }}</li>
-              <li><span class="font-medium text-gray-800">Reason for Leaving:</span> {{ application.reason_leaving ?? 'N/A' }}</li>
-            </ul>
-          </div>
+                <!-- Rental Info -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-700">Rental History</h3>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                        <li><span class="font-medium text-gray-800">Landlord Name:</span> {{ application.landlord_name
+                            ?? 'N/A' }}</li>
+                        <li><span class="font-medium text-gray-800">Landlord Contact:</span> {{
+                            application.landlord_contact ?? 'N/A' }}</li>
+                        <li><span class="font-medium text-gray-800">Rent Amount:</span> {{ application.rent_amount ??
+                            'N/A' }}</li>
+                        <li><span class="font-medium text-gray-800">Reason for Leaving:</span> {{
+                            application.reason_leaving ?? 'N/A' }}</li>
+                    </ul>
+                </div>
 
-          <!-- Consent -->
-          <div>
-            <h3 class="text-lg font-semibold mb-2 text-gray-700">Other</h3>
-            <p class="text-sm text-gray-600">
-              <span class="font-medium text-gray-800">Credit Check Agreement:</span>
-              {{ application.agree ? 'Yes' : 'No' }}
-            </p>
-          </div>
+                <!-- Consent -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-700">Other</h3>
+                    <p class="text-sm text-gray-600">
+                        <span class="font-medium text-gray-800">Credit Check Agreement:</span>
+                        <span :class="application.agree
+                            ? 'bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-medium'
+                            : 'bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-xs font-medium'" class="ml-2 inline-block">
+                            {{ application.agree ? 'Yes' : 'No' }}
+                        </span>
+                        <!-- {{ application.agree ? 'Yes' : 'No' }} -->
+                    </p>
+                </div>
 
+            </div>
+
+            <!-- Back Button -->
+            <div class="mt-6">
+                <button @click="backButton"
+                    class="px-5 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-600 text-sm">
+                    Back
+                </button>
+            </div>
         </div>
-
-        <!-- Back Button -->
-        <div class="mt-6">
-          <button
-            @click="backButton"
-            class="px-5 py-2 bg-blue-700 text-white rounded-md hover:bg-blue-600 text-sm">
-            Back
-          </button>
-        </div>
-      </div>
     </AuthenticatedLayout>
-  </template>
+</template>
 
 <!-- have commented the below code just for design purposes -->
 <!-- <template>
