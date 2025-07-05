@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('tenants', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();   // if you have auth
-            $table->string('full_name');
-            $table->string('phone');
-            $table->date('lease_expires_on');   // 👈  new column
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
         });
     }

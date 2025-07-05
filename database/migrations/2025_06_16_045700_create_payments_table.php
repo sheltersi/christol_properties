@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('lease_id')->constrained()->cascadeOnDelete();
+            $table->string('month_for');          // 2025‑06‑01 convention
+            $table->decimal('amount_paid', 8, 2)->nullable(); // null until proof uploaded
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->date('date');
+            $table->string('reference');          // 2025‑06‑01 convention
             $table->timestamps();
         });
     }

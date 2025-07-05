@@ -15,13 +15,16 @@ class Cottage extends Model implements HasMedia
     'number',
     'location',
     'price_per_month',
-    'is_available',
     'status'
    ];
 
-   public function user()
-   {
+//    public function user()
+//    {
+//     return $this->belongsTo(User::class);
+//    }
 
-    return $this->belongsTo(User::class);
+    public function leases()
+   {
+    return $this->hasMany(Lease::class);
    }
 }

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('number');
             $table->string('location');
             $table->string('price_per_month');
-            $table->boolean('is_available');
             $table->string('status')->default('available');
             $table->timestamps();
         });

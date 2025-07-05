@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('leases', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tenant_id')->constrained()->onDelete('cascade');
-            $table->string('cottage_name'); // or link to future cottages table
+            $table->foreignId('cottage_id')->constrained()->onDelete('cascade');
             $table->decimal('monthly_rent', 8, 2);
-            $table->date('start_date');
-            $table->date('end_date')->nullable();
+            $table->date('payment_date');
+            $table->date('starts_at');
+            $table->date('end_at');
+            $table->decimal('deposit_amount');
+            $table->string('status');
+            $table->date('lease_expiry_date');
             $table->timestamps();
         });
     }
