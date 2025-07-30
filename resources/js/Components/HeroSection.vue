@@ -13,7 +13,7 @@
           Christol Properties connects you with peaceful, long-term house/cottage rentals designed for comfortable living.
         </p>
         <Link
-          href="/apply-to-rent/create"
+          href="/login"
           class="inline-block btn-bg text-white font-semibold py-3 px-6 rounded-lg transition"
         >
           Get Started

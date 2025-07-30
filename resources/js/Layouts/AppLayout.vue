@@ -1,6 +1,6 @@
 <template>
     <div>
-      <nav class="bg-white border-b shadow-sm sticky top-0 z-50">
+      <nav class=" bg-white border-b shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
             <!-- Logo & Brand -->
@@ -23,10 +23,10 @@
 
             <!-- Login/Register -->
             <div class="hidden md:flex items-center space-x-4">
-              <Link href="/login" class="text-sm text-gray-600 hover:text-gray-800 font-medium">
+              <Link href="/login" class="text-sm text-gray-600 hover:text-green-700 font-medium">
                 Login
               </Link>
-              <Link href="/register" class="text-sm text-gray-600 hover:text-gray-800 font-medium">
+              <Link href="/register" class="text-sm text-gray-600 hover:text-gray-800 hover:text-green-700 font-medium">
                Register
               </Link>
             </div>
@@ -45,19 +45,20 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div v-if="isOpen" class="md:hidden bg-white shadow-md">
+    <!-- <div v-if="mobileOpen" class="absolute top-16 left-0 w-full bg-white shadow-md z-40 sm:hidden px-4 pb-8 overflow-hidden transition-all duration-300 ease-in-out max-h-screen opacity-100"> -->
+        <div v-if="isOpen" class="absolute w-full md:hidden bg-white shadow-md">
           <div class="px-4 py-3 space-y-2">
             <Link href="/" class="block nav-link">Home</Link>
             <Link href="{{ route('cottages.index') }}" class="block nav-link">Available Cottages</Link>
             <Link href="/how-it-works" class="block nav-link">How it Works</Link>
             <Link href="/apply-to-rent/create" class="block nav-link">Apply to Rent</Link>
             <Link href="/contact-us" class="block nav-link">Contact Us</Link>
-            <Link :href="route('login')" class="block text-sm text-gray-600 hover:text-gray-800 font-medium pt-2">
-              Login
+            <Link :href="route('login')" class="block text-sm text-white hover:text-gray-800 hover:bg-green-200 font-medium ms-3 bg-green-700 p-2 rounded-md w-32 text-center">
+              Login/Register
             </Link>
-            <Link :href="route('register')" class="block text-sm text-gray-600 hover:text-gray-800 font-medium pt-2">
+            <!-- <Link :href="route('register')" class="block text-sm text-gray-600 hover:text-gray-800 font-medium pt-2">
               Register
-            </Link>
+            </Link> -->
           </div>
         </div>
       </nav>

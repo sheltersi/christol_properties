@@ -25,6 +25,10 @@ const submit = () => {
     <GuestLayout>
 
         <Head title="Register" />
+              <div class="py-4 bg-slate-800 text-white font-extrabold text-2xl text-center mb-4">
+            Sign Into Your Account
+        </div>
+        <div class="px-6 py-4">
 
         <form @submit.prevent="submit">
             <!-- First Name -->
@@ -81,5 +85,6 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+        </div>
     </GuestLayout>
 </template>
