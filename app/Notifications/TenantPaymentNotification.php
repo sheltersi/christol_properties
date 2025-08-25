@@ -7,18 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class PaymentNotification extends Notification
+class TenantPaymentNotification extends Notification
 {
     use Queueable;
 
-    protected $tenant;
+    protected $user;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($tenant)
+    public function __construct($user)
     {
-        $this->tenant = $tenant;
+        $this->user = $user;
     }
 
     /**
@@ -37,11 +37,11 @@ class PaymentNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('New Rent Payment Submitted')
-            ->greeting('Hello Chris')
-            ->line("A new rent payment has been submitted by tenant: " . $this->tenant->user->full_name)
-            ->action('Review Payment', url('/admin/payments')) // or route('admin.payments.index')
-            ->line('Please log in to confirm or reject the payment.');
+            ->greeting('Hi ' . $this->user->full_name)
+            ->subject('You have successfully updated your new payment')
+            ->line('Thank you for updating your new payment details, the admin will confirm your payment soon.')
+            ->action('Login', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**
@@ -52,8 +52,8 @@ class PaymentNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => 'A new rent payment has been submitted by tenant: ' . $this->tenant->user->full_name,
-            'action' => '/admin/payments'
+            'message' => 'Thank you for updating your new payment details, the admin will confirm your payment soon.',
+            'action' => '/'
         ];
     }
 }

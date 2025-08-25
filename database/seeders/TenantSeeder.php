@@ -18,6 +18,7 @@ class TenantSeeder extends Seeder
 
         Tenant::create([
             'user_id' => $user21->id,
+            'payment_reference' => '78645'
         ]);
     }
 }

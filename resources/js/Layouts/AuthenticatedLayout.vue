@@ -3,19 +3,25 @@ import { ref, onMounted, watch, onUnmounted, computed } from 'vue';
 import ApplicationLogo from '@/images/logo.png';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
 import { Link } from '@inertiajs/vue3';
 import SidebarLink from './SidebarLink.vue';
 import { MenuIcon, XIcon } from 'lucide-vue-next';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { usePage } from '@inertiajs/vue3';
+import SidebarGroup from '@/Components/SidebarGroup.vue';
+import NavLink from '@/Components/NavLink.vue';
+
 
 const isSidebarCollapsed = ref(false);
 
-const unreadCount = ref(0);
+const { props } = usePage();
 
 const notificationCount = ref(0)
+const notifications = ref(props.notifications);
+const unreadCount = ref(props.unreadCount);
+const showDropdown = ref(false);
+const toggleDropdown = () => showDropdown.value = !showDropdown.value;
 
 
 const drawerOpen = ref(false);
@@ -23,6 +29,7 @@ const page = usePage();
 
 const isAdmin = computed(() => page.props.auth.user?.role === 'admin');
 const showSidebarText = ref(true); // controls when to show text
+
 
 watch(isSidebarCollapsed, (collapsed) => {
     if (collapsed) {
@@ -55,15 +62,25 @@ watch(() => page.props.flash, (flash) => {
     }
 }, { immediate: true }); // Optional: run immediately on mount
 
-// ✅ Unread notification count
-onMounted(async () => {
+onMounted(()=>{
+    unreadCount.value = page.props.auth.user?.unread_notifications_count ?? 0
+})
+
+// ✅ function to refresh via an API
+async function refreshUnreadCount(){
     try {
         const res = await axios.get('/admin/notifications/unread-count');
         unreadCount.value = res.data.count;
     } catch (error) {
         console.error('Failed to fetch unread count:', error);
     }
-});
+};
+
+//call this after marking a notification as read
+async function markAsRead(notificationId){
+    await axios.post(`/admin/notifications/${notificationId}/mark-as-read`)
+    await refreshUnreadCount()
+}
 
 </script>
 
@@ -83,8 +100,9 @@ onMounted(async () => {
             }">
             <div class="flex items-center justify-between p-4 border-b">
                 <span class="flex"><img :src="ApplicationLogo" alt="Logo" class="h-8" />
-                    <h1 class="mt-2 font-bold text-lg bg-gradient-to-r from-cyan-800 via-violet-500 to-emerald-500 bg-clip-text text-transparent" v-if="!isSidebarCollapsed && showSidebarText">
-                      Christo Property
+                    <h1 class="mt-2 font-bold text-lg bg-gradient-to-r from-cyan-800 via-violet-500 to-emerald-500 bg-clip-text text-transparent"
+                        v-if="!isSidebarCollapsed && showSidebarText">
+                        Christo Property
 
                     </h1>
                 </span>
@@ -93,7 +111,10 @@ onMounted(async () => {
                 </button>
             </div>
             <nav class="mt-4 space-y-2 px-4">
-                <SidebarLink v-if="!isAdmin" :to="route('dashboard')" :active="route().current('dashboard')"
+                <SidebarLink v-if="!isAdmin" :to="route('tenant.dashboard')"
+                    :active="route().current('tenant.dashboard')" label="Dashboard" :icon="['fas', 'house']"
+                    :collapsed="isSidebarCollapsed" :showText="showSidebarText" />
+                <SidebarLink v-if="isAdmin" :to="route('admin.dashboard')" :active="route().current('admin.dashboard')"
                     label="Dashboard" :icon="['fas', 'house']" :collapsed="isSidebarCollapsed"
                     :showText="showSidebarText" />
                 <SidebarLink v-if="!isAdmin" :to="route('appointments.index')"
@@ -111,16 +132,85 @@ onMounted(async () => {
                 <SidebarLink v-if="!isAdmin" :to="route('all-appointments.index')" label="Maintenance"
                     :icon="['fas', 'fa-screwdriver-wrench']" :collapsed="isSidebarCollapsed"
                     :showText="showSidebarText" />
-                    <!-- Contact & Account -->
-                      <SidebarLink v-if="!isAdmin" :to="route('all-appointments.index')" label="Contact & Account"
-                    :icon="['fas', 'fa-address-card']" :collapsed="isSidebarCollapsed"
+                <!-- Contact & Account -->
+                <SidebarLink v-if="!isAdmin" :to="route('all-appointments.index')" label="Contact & Account"
+                    :icon="['fas', 'fa-address-card']" :collapsed="isSidebarCollapsed" :showText="showSidebarText" />
+                <SidebarGroup v-if="!isAdmin" :icon="['fas', 'credit-card']" label="Payments"
+                    :isSidebarCollapsed="isSidebarCollapsed" :showSidebarText="showSidebarText">
+                    <SidebarLink :to="route('tenant.payment.create')" :active="route().current('tenant.payment.create')"
+                        label="Pay Rent" :icon="['fas', 'money-bill-wave']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Payment History" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                </SidebarGroup>
+                <!-- admin section -->
+                <SidebarGroup v-if="isAdmin" :icon="['fas', 'fa-people-roof']" label="Tenants"
+                    :isSidebarCollapsed="isSidebarCollapsed" :showSidebarText="showSidebarText">
+                    <SidebarLink :to="route('tenant.payment.create')" :active="route().current('tenant.payment.create')"
+                        label="View All Tenants" :icon="['fas', 'money-bill-wave']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Add New Tenant" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                </SidebarGroup>
+                <SidebarGroup v-if="isAdmin" :icon="['fas', 'credit-card']" label="Payments"
+                    :isSidebarCollapsed="isSidebarCollapsed" :showSidebarText="showSidebarText">
+                    <SidebarLink :to="route('tenant.payment.create')" :active="route().current('tenant.payment.create')"
+                        label="Pending Payment Confirmation" :icon="['fas', 'money-bill-wave']"
+                        :collapsed="isSidebarCollapsed" :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="View All Payments" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Missed Payments" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                </SidebarGroup>
+                <SidebarGroup v-if="isAdmin" :icon="['fas', 'file-signature']" label="leases"
+                    :isSidebarCollapsed="isSidebarCollapsed" :showSidebarText="showSidebarText">
+                    <SidebarLink :to="route('tenant.payment.create')" :active="route().current('tenant.payment.create')"
+                        label="View Active Leases" :icon="['fas', 'money-bill-wave']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Create / Upload New Lease" :icon="['fas', 'clock-rotate-left']"
+                        :collapsed="isSidebarCollapsed" :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Expiring Soon" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Expired" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                </SidebarGroup>
+                <SidebarGroup v-if="isAdmin" :icon="['fas', 'receipt']" label="Receipts & Invoices"
+                    :isSidebarCollapsed="isSidebarCollapsed" :showSidebarText="showSidebarText">
+                    <SidebarLink :to="route('tenant.payment.create')" :active="route().current('tenant.payment.create')"
+                        label="View Generated Receipts" :icon="['fas', 'money-bill-wave']"
+                        :collapsed="isSidebarCollapsed" :showText="showSidebarText" />
+                    <SidebarLink :to="route('tenant.payment.create')" :active="route().current('tenant.payment.create')"
+                        label="View Generated Invoice" :icon="['fas', 'money-bill-wave']"
+                        :collapsed="isSidebarCollapsed" :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Create & Send Invoice" :icon="['fas', 'clock-rotate-left']"
+                        :collapsed="isSidebarCollapsed" :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Download PDFs" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                </SidebarGroup>
+                <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                    label="Notices & Warnings" :icon="['fas', 'circle-exclamation']" :collapsed="isSidebarCollapsed"
                     :showText="showSidebarText" />
-                <!-- <SidebarLink v-if="!isAdmin" :to="route('profile.edit')" label="Profile"
-                    :icon="['fas', 'user']" :collapsed="isSidebarCollapsed" :showText="showSidebarText" /> -->
-                <!-- <SidebarLink v-if="!isAdmin" :to="route('logout')" label="Logout"
-                    :icon="['fas', 'fa-right-from-bracket']" :collapsed="isSidebarCollapsed"
-                    :showText="showSidebarText" /> -->
-
+                <SidebarGroup v-if="isAdmin" :icon="['fas', 'gear']" label="Settings"
+                    :isSidebarCollapsed="isSidebarCollapsed" :showSidebarText="showSidebarText">
+                    <SidebarLink :to="route('tenant.payment.create')" :active="route().current('tenant.payment.create')"
+                        label="Rent Amount" :icon="['fas', 'money-bill-wave']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Bank Details" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                    <SidebarLink :to="route('payments.history')" :active="route().current('payments.history')"
+                        label="Download PDFs" :icon="['fas', 'clock-rotate-left']" :collapsed="isSidebarCollapsed"
+                        :showText="showSidebarText" />
+                </SidebarGroup>
             </nav>
         </aside>
 
@@ -151,19 +241,27 @@ onMounted(async () => {
                     <!-- </div> -->
 
                     <div class="inline-flex">
-                        <h1 class="me-4">
-                            <font-awesome-icon :icon="['fas', 'bell']" />
-                            notifications
-                        </h1>
+                        <div class="relative me-4">
+                            <NavLink :href="route('notifications.index')" class="" >
+                                <!-- <font-awesome-icon :icon="['fas', 'bell']" class="text-orange-300" /> -->
+                                <span class="p-0 m-0">🔔</span>
+                                <span v-if="unreadCount > 0"
+                                    class="absolute -top-0.5 -right-0.5 bg-red-600 text-white rounded-full px-1 py-0 text-[10px] leading-none">
+                                    <!-- class="absolute -top-0 -right-0 bg-red-600 text-white text-xs rounded-full px-0.5 py-0.5"> -->
+                                    {{ unreadCount }}
+                                </span>
+                            </NavLink >
+                        </div>
+                        <!-- </h1> -->
 
                         <!-- User Dropdown -->
                         <Dropdown :align="right" width="48">
                             <template #trigger>
                                 <button
                                     class="user-cicle inline-flex items-center text-sm text-gray-600 hover:text-gray-800">
-                                    <font-awesome-icon :icon="['fas', 'user']" class="mr-2 text-gray-500" />
+                                    <font-awesome-icon :icon="['fas', 'user']" class="mr-1 text-cyan-500" />
                                     {{ $page.props.auth.user?.first_name }}
-                                    <font-awesome-icon :icon="['fas', 'angle-down']" class="ms-2" />
+                                    <font-awesome-icon :icon="['fas', 'angle-down']" class="ms-2 " />
                                 </button>
                             </template>
                             <template #content>
@@ -207,7 +305,7 @@ onMounted(async () => {
     opacity: 0;
 }
 
-.color{
-    color:darkcyan
+.color {
+    color: darkcyan
 }
 </style>

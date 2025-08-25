@@ -12,12 +12,12 @@ const props = defineProps({
 </script>
 
 <template>
-  <Head title="My Dashboard" />
+  <Head title="My Dashboard"/>
 
   <AuthenticatedLayout>
         <template #header>
       <h1 class="text-2xl font-bold">Hello, {{ tenant.user?.first_name }} 👋</h1>
-            <hr class="greeting-border w-44 mt-0 border-red-900">
+            <hr class="greeting-border w-44 mt-2 border-cyan-600">
         </template>
         <div class="p-6 space-y-6">
       <!-- Cottage Info -->
@@ -53,7 +53,7 @@ const props = defineProps({
 </span></p>
         <!-- <Link href="tenants/.$tenant./payments/" class="text-blue-600 hover:underline">Update My Latest Rent Payment<br/> </Link>
         <Link :href="`/tenants/${tenant.id}/payments`" class="text-blue-600 hover:underline"> Update My Latest Rent Payment </Link> -->
-       	<Link :href="route('tenant.payment.create')" class="text-blue-600 hover:underline"> Update My Latest Rent Payment </Link>
+       	<Link :href="route('tenant.payment.create')" class="text-cyan-600 hover:underline"> Update My Latest Rent Payment </Link>
         <!-- <Link href="/tenant/payments" class="text-blue-600 hover:underline">View payment history</Link> -->
       </div>
 
@@ -71,7 +71,7 @@ const props = defineProps({
 
           </li>
         </ul>
-        <Link href="#" class="mt-2 inline-block text-blue-600 hover:underline">New request</Link>
+        <Link href="#" class="mt-2 inline-block text-cyan-600 hover:underline">New request</Link>
       </div>
 
       <!-- Appointments -->
@@ -89,7 +89,10 @@ const props = defineProps({
 
 <style scoped>
 .greeting-border{
-    /* border-radius: 100px; */
+    border-radius: 100px;
     border-width: 5px;
+}
+.color{
+    color:darkcyan;
 }
 </style>

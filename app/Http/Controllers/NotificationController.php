@@ -8,9 +8,9 @@ use Inertia\Inertia;
 
 class NotificationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
 {
-    $notifications = auth()->user()->notifications()->paginate(10);
+    $notifications = $request->user()->notifications()->latest()->get();
     return Inertia::render('Admin/Notifications', [
         'notifications' => $notifications
     ]);
@@ -25,6 +25,13 @@ public function markAsRead(DatabaseNotification $notification)
     $notification->markAsRead();
 
     return redirect()->back();
+}
+
+public function markAllAsRead(Request $request)
+{
+    $request->user()->unreadNotifications()->markAsRead();
+    
+    return back();
 }
 
 }

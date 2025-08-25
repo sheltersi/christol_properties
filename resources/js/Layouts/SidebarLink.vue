@@ -1,5 +1,5 @@
 <template>
-    <a :href="to" :method="method" :as="as" class="side-link block px-4 py-2 rounded hover:bg-gray-700 hover:text-white"
+    <a :href="to" :method="method" :as="as" class="side-link block px-4 py-2 rounded hover:bg-gray-200 hover:text-white"
         :class="{ 'bg-gray-200 font-semibold text-blue-700': active }">
          <font-awesome-icon v-if="icon" :icon="icon" class="icons-color w-8" />
             <span v-if="showText" class="text-sm text-gray-700">{{ label }}</span>

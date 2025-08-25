@@ -6,6 +6,7 @@ use App\Models\Payment;
 use App\Models\Tenant;
 use App\Models\User;
 use App\Notifications\PaymentNotification;
+use App\Notifications\TenantPaymentNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -42,7 +43,6 @@ class PaymentController extends Controller
             'lease_id'     => $tenant->currentLease?->id,
             'month_for'    => $request->month_for,
             'amount_paid'  => $request->amount_paid,
-            // 'status'       => 'pending',
             'date' => $request->date,
             'reference'  => $request->reference,
         ]);
@@ -58,6 +58,8 @@ class PaymentController extends Controller
         foreach ($admins as $admin) {
             $admin->notify(new PaymentNotification($tenant));
         }
+        $user = Auth::user();
+        $user->notify(new TenantPaymentNotification($user));
 
         return redirect(route('tenant.dashboard'))->with('success', 'Payment submitted successfully!');
     }

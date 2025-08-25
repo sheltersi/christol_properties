@@ -12,10 +12,13 @@ import {
     faAngleDown,
     faBell,
     faChevronDown,
+    faChevronUp,
     faCircleExclamation,
     faCreditCard,
     faFileSignature,
+    faGear,
     faHouse,
+    faPeopleRoof,
     faReceipt,
     faRightFromBracket,
     faScrewdriverWrench,
@@ -34,7 +37,7 @@ library.add(faUser, faChevronDown, faAngleDown,faPhone,
      faEnvelope, faClock, faFacebook, faInstagram, faWhatsapp,
       faLocationDot,faSquareCheck,faBell,faHouse,faFileSignature,
     faCreditCard,faReceipt,faCircleExclamation, faScrewdriverWrench,
-faRightFromBracket,faAddressCard);
+faRightFromBracket,faAddressCard,faChevronUp,faPeopleRoof,faGear);
 
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

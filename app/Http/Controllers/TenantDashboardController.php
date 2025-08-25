@@ -21,10 +21,10 @@ class TenantDashboardController extends Controller
     ->where('user_id', auth()->id())
     ->firstOrFail();
 
-    // dd($tenant);
-
     return Inertia::render('Tenant/Dashboard', [
         'tenant' => $tenant,
+        'notifications' => $tenant->unreadNotifications()->take(5)->get(),
+        'unreadCount' => $tenant->unreadNotifications()->count()
         // 'cottage' => $tenant->cottage, // assuming relationship
     ]);
 }

@@ -58,6 +58,9 @@ Route::middleware('auth')->group(function () {
     #Payments routes
     Route::get('payments/create', [PaymentController::class, 'create'])->name('tenant.payment.create');
     Route::post('payments', [PaymentController::class, 'store'])->name('tenant.payment.store');
+    Route::get('/payments/rent', [PaymentController::class, 'payRent'])->name('payments.rent');
+Route::get('/payments/history', [PaymentController::class, 'history'])->name('payments.history');
+
 
     # Rental Applications Routes
     Route::get('tenants/applications', [ApplicationController::class, 'index'])->name('applications.index');
@@ -75,12 +78,17 @@ Route::middleware('auth')->group(function () {
             'count' => auth()->user()->unreadNotifications()->count()
         ]);
     });
+
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.readAll');
+
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::post('/admin/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])
-        ->name('admin.notifications.read');
-});
+// Route::middleware(['auth', 'role:admin'])->group(function () {
+//     Route::post('/admin/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])
+//         ->name('admin.notifications.read');
+// });
 
 
 Route::get('/cottages', [CottageController::class, 'index'])->name('cottages.index');

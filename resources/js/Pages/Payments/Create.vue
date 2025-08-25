@@ -1,10 +1,13 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue'
 import { ref } from 'vue'
-import { useForm } from '@inertiajs/vue3'
+import { Head, useForm } from '@inertiajs/vue3'
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import BackButton from '@/Components/BackButton.vue';
 
 
-defineOptions({ layout: AppLayout })
+// defineOptions({ layout: AppLayout })
 
 defineProps({
     tenant: Object,
@@ -36,8 +39,15 @@ const submitForm = () => {
 </script>
 
 <template>
-    <div class="max-w-2xl mx-auto bg-white shadow rounded-xl p-6 mt-8">
+      <Head title="Create Payment"/>
+<AuthenticatedLayout>
+
+    <template #header>
         <h2 class="text-xl font-bold mb-4">Update Latest Rent Payment</h2>
+    </template>
+
+
+    <div class="max-w-2xl mx-auto bg-white shadow rounded-xl p-6 mt-8">
 
         <form @submit.prevent="submitForm" enctype="multipart/form-data" class="space-y-4">
             <div>
@@ -74,12 +84,20 @@ const submitForm = () => {
                     class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
             </div>
 
-            <div class="pt-4">
-                <button type="submit"
-                    class="bg-blue-600 text-white font-semibold px-4 py-2 rounded hover:bg-blue-700 transition">
+            <div class="flex pt-4">
+                <PrimaryButton class="" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
                     Submit Payment
-                </button>
+                </PrimaryButton>
+
+
             </div>
         </form>
+        <div class="flex justify-end">
+              <BackButton :href="route('tenant.dashboard')" class="">
+                    Back
+                </BackButton>
+        </div>
+
     </div>
+    </AuthenticatedLayout>
 </template>
