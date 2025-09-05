@@ -11,6 +11,7 @@ class NotificationController extends Controller
     public function index(Request $request)
 {
     $notifications = $request->user()->notifications()->latest()->get();
+    // dd($notifications);
     return Inertia::render('Admin/Notifications', [
         'notifications' => $notifications
     ]);
@@ -30,7 +31,7 @@ public function markAsRead(DatabaseNotification $notification)
 public function markAllAsRead(Request $request)
 {
     $request->user()->unreadNotifications()->markAsRead();
-    
+
     return back();
 }
 

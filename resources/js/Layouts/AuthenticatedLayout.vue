@@ -17,12 +17,7 @@ const isSidebarCollapsed = ref(false);
 
 const { props } = usePage();
 
-const notificationCount = ref(0)
-const notifications = ref(props.notifications);
 const unreadCount = ref(props.unreadCount);
-const showDropdown = ref(false);
-const toggleDropdown = () => showDropdown.value = !showDropdown.value;
-
 
 const drawerOpen = ref(false);
 const page = usePage();
@@ -62,12 +57,12 @@ watch(() => page.props.flash, (flash) => {
     }
 }, { immediate: true }); // Optional: run immediately on mount
 
-onMounted(()=>{
+onMounted(() => {
     unreadCount.value = page.props.auth.user?.unread_notifications_count ?? 0
 })
 
 // ✅ function to refresh via an API
-async function refreshUnreadCount(){
+async function refreshUnreadCount() {
     try {
         const res = await axios.get('/admin/notifications/unread-count');
         unreadCount.value = res.data.count;
@@ -77,7 +72,7 @@ async function refreshUnreadCount(){
 };
 
 //call this after marking a notification as read
-async function markAsRead(notificationId){
+async function markAsRead(notificationId) {
     await axios.post(`/admin/notifications/${notificationId}/mark-as-read`)
     await refreshUnreadCount()
 }
@@ -114,6 +109,9 @@ async function markAsRead(notificationId){
                 <SidebarLink v-if="!isAdmin" :to="route('tenant.dashboard')"
                     :active="route().current('tenant.dashboard')" label="Dashboard" :icon="['fas', 'house']"
                     :collapsed="isSidebarCollapsed" :showText="showSidebarText" />
+                <SidebarLink :to="route('notifications.index')" :active="route().current('notifications.index')"
+                    label="Notifications" :icon="['fas', 'bell']" :collapsed="isSidebarCollapsed"
+                    :showText="showSidebarText" />
                 <SidebarLink v-if="isAdmin" :to="route('admin.dashboard')" :active="route().current('admin.dashboard')"
                     label="Dashboard" :icon="['fas', 'house']" :collapsed="isSidebarCollapsed"
                     :showText="showSidebarText" />
@@ -220,7 +218,6 @@ async function markAsRead(notificationId){
             <!-- Topbar -->
             <nav class="bg-white border-b shadow sm:px-6 lg:px-8">
                 <div class="flex items-center space-x-4 justify-between h-16">
-                    <!-- <div class="flex items-center space-x-4"> -->
                     <button class="lg:hidden" @click="drawerOpen = true">
                         <MenuIcon class="h-6 w-6 text-gray-700" />
                     </button>
@@ -242,17 +239,15 @@ async function markAsRead(notificationId){
 
                     <div class="inline-flex">
                         <div class="relative me-4">
-                            <NavLink :href="route('notifications.index')" class="" >
+                            <NavLink :href="route('notifications.index')" class="">
                                 <!-- <font-awesome-icon :icon="['fas', 'bell']" class="text-orange-300" /> -->
                                 <span class="p-0 m-0">🔔</span>
                                 <span v-if="unreadCount > 0"
                                     class="absolute -top-0.5 -right-0.5 bg-red-600 text-white rounded-full px-1 py-0 text-[10px] leading-none">
-                                    <!-- class="absolute -top-0 -right-0 bg-red-600 text-white text-xs rounded-full px-0.5 py-0.5"> -->
                                     {{ unreadCount }}
                                 </span>
-                            </NavLink >
+                            </NavLink>
                         </div>
-                        <!-- </h1> -->
 
                         <!-- User Dropdown -->
                         <Dropdown :align="right" width="48">
@@ -260,7 +255,7 @@ async function markAsRead(notificationId){
                                 <button
                                     class="user-cicle inline-flex items-center text-sm text-gray-600 hover:text-gray-800">
                                     <font-awesome-icon :icon="['fas', 'user']" class="mr-1 text-cyan-500" />
-                                    {{ $page.props.auth.user?.first_name }}
+                                    {{ $page.props.auth.user?.first_name ?? 'unknown' }}
                                     <font-awesome-icon :icon="['fas', 'angle-down']" class="ms-2 " />
                                 </button>
                             </template>
