@@ -20,7 +20,9 @@ class Payment extends Model implements HasMedia
         'amount_paid',
         'status',
         'date',
-        'reference'
+        'reference',
+        'outstanding_balance',
+        'over_paid_amount'
     ];
 
      public function lease():BelongsTo

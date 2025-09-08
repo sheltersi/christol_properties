@@ -7,21 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ShortPaymentNotification extends Notification
+class AdminShortPaymentNotification extends Notification
 {
     use Queueable;
-    protected $amount, $month, $remaining_balance, $tenant;
+
+    protected $admin, $tenant,$amount, $month, $remaining_balance;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($tenant,$amount, $month, $remaining_balance)
+    public function __construct($admin,$tenant,$amount, $month, $remaining_balance)
     {
+        $this->admin = $admin;
+        $this->tenant = $tenant;
         $this->amount = $amount;
         $this->month = $month;
-        $this->month = $remaining_balance;
-        $this->tenant = $tenant;
-        //
+        $this->remaining_balance = $remaining_balance;
     }
 
     /**
@@ -40,10 +41,9 @@ class ShortPaymentNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Hi '.$this->tenant->first_name)
-            ->subject('New Payment Notification')
-            ->line('Your updated payment details for amount R'.$this->amount.' for the month of'.$this->month.' has been received. Please make a full payment as soon as possible')
-            ->action('Notification Action', url('/'))
+            ->greeting('Hello '.$this->admin->first_name)
+            ->subject('Kindly note that tenant '.$this->tenant->full_name. 'has made a short payment of R'.$this->amount. ' for the month of '.$this->month.'. You will be notified once they have completed their payment.')
+            ->action('Login', url('/'))
             ->line('Thank you for using our application!');
     }
 

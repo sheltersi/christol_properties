@@ -25,7 +25,7 @@ const props = defineProps({
         <h2 class="text-lg font-semibold">🏡 My Unit</h2>
         <p><strong>Unit Number:</strong> {{ tenant.current_lease?.cottage.number || "NA" }}</p>
         <p><strong>Location:</strong> {{ tenant.current_lease?.cottage.location || "NA" }}</p>
-        <p><strong>Monthly Rent:</strong> R{{ tenant.current_lease?.cottage.price_per_month || "NA" }}</p>
+        <p><strong>Monthly Rent:</strong> R{{ tenant.current_lease?.monthly_rent || "NA" }}</p>
       </div>
 
       <!-- Payment Info -->
@@ -41,11 +41,12 @@ const props = defineProps({
       : 'No payments yet' }}</p>
         <p><strong>Month for:</strong> {{ tenant.current_lease.current_payment.month_for ?? 'No payments yet' }}</p>
         <p><strong>Balance:</strong> R{{ tenant.current_lease.current_payment.amount_paid || "NA" }}</p>
-        <p><strong>Outstanding Balance:</strong> Up-to-date</p>
+        <p><strong>Outstanding Balance:</strong> <span>{{ tenant.current_lease.current_payment.outstanding_balance ?? 'Up-to-date' }}</span></p>
         <!-- <p><strong>Status:</strong> {{ tenant.current_lease.current_payment.status ?? 'No payments yet' }}</p> -->
 <p><strong>Status: </strong>
 <span :class="{
   'bg-green-500 px-2.5 py-0.5 text-xs text-white rounded inline-block ': tenant.current_lease.current_payment.status === 'approved',
+  'bg-orange-400 px-2.5 py-0.5 text-xs text-white rounded inline-block': tenant.current_lease.current_payment.status === 'partial',
   'bg-yellow-500 px-2.5 py-0.5 text-xs text-white rounded inline-block': tenant.current_lease.current_payment.status === 'pending',
   'bg-red-600 px-2.5 py-0.5 text-xs text-white rounded inline-block': tenant.current_lease.current_payment.status === 'declined'
 }">

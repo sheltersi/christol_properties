@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use App\Models\Tenant;
 use App\Models\User;
+use App\Notifications\AdminShortPaymentNotification;
 use App\Notifications\OverPaymentNotification;
 use App\Notifications\PaymentNotification;
 use App\Notifications\ShortPaymentNotification;
@@ -45,9 +46,18 @@ class PaymentController extends Controller
 
         $tenant = Auth::user()->tenant;
 
-        $admins = User::where('role', 'admin')->get();
-        $amount = $validated_data['amount_paid'];
+        $admin = User::where('role', 'admin')->first();
+        $amount_paid = $validated_data['amount_paid'];
         $month = $validated_data['month_for'];
+        $lease = $tenant->currentLease;
+
+        // The following logic first check if the user does not have any outstanding balance
+
+        $previous_balance = Payment::where('lease_id', $lease->id)
+        ->where('outstanding_balance', '>', 0)
+        ->sum('outstanding_balance');
+
+        $remaining_balance = $
 
         // statement to run when user does not have existing lease
         if(!$tenant || !$tenant->currentLease)
@@ -58,23 +68,31 @@ class PaymentController extends Controller
         $validated_data['lease_id'] = $tenant->currentLease?->id;
 
         // statement to run when user underpay
-        if($validated_data['amount_paid'] < $tenant->currentLease->monthly_rent || $validated_data['amount_paid'] < $tenant->currentLease->monthly_rent)
+        if($validated_data['amount_paid'] < $tenant->currentLease->monthly_rent)
         {
             $validated_data['status'] = 'partial';
-            $remaining_balance = $tenant->currentLease->monthly_rent - $amount;
-            $tenant->notify(new ShortPaymentNotification($amount, $month, $remaining_balance));
+            $remaining_balance = ($tenant->currentLease->monthly_rent ) - ($amount_paid);
+            // dd($remaining_balance);
+            $validated_data['outstanding_balance'] = $remaining_balance;
+            $admin->notify(new AdminShortPaymentNotification($admin,$tenant,$amount_paid, $month, $remaining_balance));
+            $tenant->notify(new ShortPaymentNotification($tenant,$amount_paid, $month, $remaining_balance));
         }
 
         //statement to run when user overpaid
         if($validated_data['amount_paid'] > $tenant->currentLease->monthly_rent)
         {
 
-            $over_paid_amount = $amount - $tenant->currentLease->monthly_rent ;
+            $over_paid_amount = $amount_paid - $tenant->currentLease->monthly_rent ;
             $validated_data['status'] = 'pending';
             $validated_data['over_paid_amount'] = $over_paid_amount;
-             foreach ($admins as $admin) {
-            $admin->notify(new OverPaymentNotification($tenant,$admin, $amount,$over_paid_amount,$month));
+            $admin->notify(new OverPaymentNotification($tenant,$admin, $amount_paid,$over_paid_amount,$month));
         }
+
+         if($validated_data['amount_paid'] == $tenant->currentLease->monthly_rent)
+        {
+            $validated_data['status'] = 'pending';
+            $admin->notify(new PaymentNotification($tenant));
+            $tenant->notify(new TenantPaymentNotification($tenant));
         }
 
         $payment = Payment::create($validated_data);
@@ -84,12 +102,6 @@ class PaymentController extends Controller
             $payment->addMediaFromRequest('proof')
                 ->toMediaCollection('proofs');
         }
-
-        foreach ($admins as $admin) {
-            $admin->notify(new PaymentNotification($tenant));
-        }
-        $user = Auth::user();
-        $user->notify(new TenantPaymentNotification($user));
 
         return redirect(route('tenant.dashboard'))->with('success', 'Payment submitted successfully!');
     }
