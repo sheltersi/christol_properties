@@ -66,16 +66,16 @@
                 <h2 class="text-xl font-bold mb-4  border-b border-gray-300">Your Appointment Summary</h2>
                 <div class="space-y-2 text-sm lg:me-4 text-gray-700">
                     <p><strong>Cottage Number:</strong>
-                    <p class="text-xl"> {{ form.cottage_number || 'Not selected' }}</p>
+                    <span class="text-xl"> {{ form.cottage_number || 'Not selected' }}</span>
                     </p>
                     <p><strong>Preferred Appointment Date:</strong>
-                    <p class="text-xl"> {{ form.preferred_date || 'Not selected' }}</p>
+                    <span class="text-xl"> {{ form.preferred_date || 'Not selected' }}</span>
                     </p>
                     <p class="mt-2"><strong>Time:</strong>
-                    <p class="text-xl"> {{ form.preferred_time || 'Not selected' }}</p>
+                    <span class="text-xl"> {{ form.preferred_time || 'Not selected' }}</span>
                     </p>
                     <p class="mt-2"><strong>Message:</strong>
-                    <p class="text-xl">{{ form.message || 'No message provided' }}</p>
+                    <span class="text-xl">{{ form.message || 'No message provided' }}</span>
                     </p>
                 </div>
             </div>

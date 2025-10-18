@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('starts_at');
             $table->date('end_at');
             $table->decimal('deposit_amount');
-            $table->string('status');
+            $table->enum('status',['active','expired'])->default('active');
             $table->date('lease_expiry_date');
             $table->timestamps();
         });

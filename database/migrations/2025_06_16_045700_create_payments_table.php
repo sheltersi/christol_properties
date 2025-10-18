@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'approved', 'rejected','partial','not paid'])->default('pending');
             $table->date('date');
             $table->string('reference');          // 2025‑06‑01 convention
-             $table->decimal('over_paid_balance')->nullable(00.0);
+             $table->decimal('overpaid_balance')->default(00.0);
              $table->decimal('outstanding_balance')->default(00.0);
             $table->timestamps();
         });

@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\Models\Payment;
+use App\Models\Tenant;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+
+class AllocatingOverPayments extends Command
+{
+
+    protected $signature = 'app:allocating-over-payments';
+
+
+    protected $description = 'Allocating';
+
+
+    public function __invoke()
+    {
+        $tenants = Tenant::with('currentLease')->get();
+
+        foreach ($tenants as $tenant) {
+            $lease = $tenant->currentLease;
+
+            if (!$lease) {
+                Log::warning("Tenant ID {$tenant->id} ({$tenant->name}) has no active lease. Skipping overpayment allocation.");
+                continue;
+            }
+
+            // Check if the payment for this month already exists
+            $month = Carbon::now()->format('F Y');
+            $existing = Payment::where('lease_id', $lease->id)
+                ->where('month_for', $month)
+                ->exists();
+
+            if ($existing) {
+                Log::info("Payment for tenant {$tenant->id} already exists for {$month}. Skipping.");
+                continue; // skip duplicate month
+            }
+
+            $monthly_rent = $lease->monthly_rent;
+            $prepaid_balance = $tenant->prepaid_balance;
+
+            if ($prepaid_balance >= $monthly_rent) {
+                // Fully covered
+                Payment::create([
+                    'lease_id' => $lease->id,
+                    'month_for' => Carbon::now()->format('F Y'),
+                    'amount_paid' => $monthly_rent,
+                    'outstanding_balance' => 0,
+                    'overpaid_balance' => 0,
+                    'status' => 'paid',
+                    'reference' => 'AUTO_PREPAID_FULL',
+                    'date' => now(),
+                ]);
+
+                $tenant->decrement('prepaid_balance', $monthly_rent);
+            } elseif ($prepaid_balance > 0) {
+                // Partial coverage
+                $outstanding = $monthly_rent - $prepaid_balance;
+
+                Payment::create([
+                    'lease_id' => $lease->id,
+                    'month_for' => Carbon::now()->format('F Y'),
+                    'amount_paid' => $prepaid_balance,
+                    'outstanding_balance' => $outstanding,
+                    'overpaid_balance' => 0,
+                    'status' => 'partial',
+                    'reference' => 'AUTO_PREPAID_PARTIAL',
+                    'date' => now(),
+                ]);
+
+                $tenant->update(['prepaid_balance' => 0]);
+            } else {
+                // No prepaid → normal process (outstanding will be created elsewhere)
+            }
+        }
+    }
+}

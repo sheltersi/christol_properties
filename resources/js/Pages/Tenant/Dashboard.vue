@@ -42,6 +42,7 @@ const props = defineProps({
         <p><strong>Month for:</strong> {{ tenant.current_lease.current_payment.month_for ?? 'No payments yet' }}</p>
         <p><strong>Balance:</strong> R{{ tenant.current_lease.current_payment.amount_paid || "NA" }}</p>
         <p><strong>Outstanding Balance:</strong> <span>{{ tenant.current_lease.current_payment.outstanding_balance ?? 'Up-to-date' }}</span></p>
+        <p><strong>Overpaid Balance:</strong> <span>{{ tenant.current_lease.current_payment.overpaid_balance ?? '' }}</span></p>
         <!-- <p><strong>Status:</strong> {{ tenant.current_lease.current_payment.status ?? 'No payments yet' }}</p> -->
 <p><strong>Status: </strong>
 <span :class="{

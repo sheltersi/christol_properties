@@ -6,6 +6,10 @@ const props = defineProps({
   stats: Object,
   recentAppointments: Array,
   notifications: Array,
+  tenants:Array,
+  pendingPayments:Array,
+  partialPayments:Array
+
 });
 </script>
 
@@ -25,12 +29,22 @@ const props = defineProps({
           <p class="text-2xl font-bold">{{ stats.totalCottages }}</p>
         </div>
         <div class="bg-white shadow rounded-xl p-4">
-          <p class="text-sm text-gray-500">✅ Rent Paid</p>
-          <p class="text-2xl font-bold">{{ stats.upcomingAppointments }}</p>
+          <p class="text-sm text-gray-500">🏘️ Total tenants</p>
+          <p class="text-2xl font-bold">{{ stats.totalTenants }}</p>
+        </div>
+        <div class="bg-white shadow rounded-xl p-4">
+          <p class="text-sm text-gray-500">✅ Rent Paid (This Month)</p>
+          <p class="text-2xl font-bold">
+            R{{ Number(stats.rentPaid).toLocaleString() }}
+        </p>
+        </div>
+        <div class="bg-white shadow rounded-xl p-4">
+          <p class="text-sm text-gray-500">⏳ Amount left</p>
+          <p class="text-2xl font-bold">R{{Number(stats.rentLeft).toLocaleString()}}</p>
         </div>
         <div class="bg-white shadow rounded-xl p-4">
           <p class="text-sm text-gray-500">❌ Unpaid Tenant</p>
-          <p class="text-2xl font-bold">{{ stats.totalUsers }}</p>
+          <p class="text-2xl font-bold">{{ Number(stats.rentLeft).toLocaleString() }}</p>
         </div>
         <div class="bg-white shadow rounded-xl p-4">
           <p class="text-sm text-gray-500">📑 Lease Expiring Soon</p>
@@ -69,8 +83,8 @@ const props = defineProps({
         </table>
       </div>
         <div class="bg-white shadow rounded-xl p-4">
-        <h2 class="text-xl font-semibold mb-4">💰 Total Income This Month</h2>
-        <p>R130 000</p>
+        <h2 class="text-xl font-semibold mb-4">💰 Total Income In A Month</h2>
+        <p>R{{ Number(stats.rentDue).toLocaleString() }}</p>
         </div>
 
       <!-- Notifications -->

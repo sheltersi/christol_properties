@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('payment_reference')->unique();
+            $table->decimal('prepaid_balance', 10, 2)->default(0);
             $table->timestamps();
         });
     }
