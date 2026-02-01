@@ -18,7 +18,7 @@ const drawerOpen = ref(false);
         <!-- Main content -->
         <div class="flex flex-col flex-1">
             <!-- Topbar -->
-            <nav class="bg-white border-b shadow sm:px-6 lg:px-8">
+            <nav class="bg-white border-b shadow-sm sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <div class="flex items-center space-x-4">
                         <Link :href="route('dashboard')">
@@ -55,7 +55,7 @@ const drawerOpen = ref(false);
             </nav>
 
             <!-- Header Slot -->
-            <header v-if="$slots.header" class="bg-white shadow">
+            <header v-if="$slots.header" class="bg-white shadow-sm">
                 <div class="max-w-7xl mx-auto py-6 px-6">
                     <slot name="header" />
                 </div>

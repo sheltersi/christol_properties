@@ -24,36 +24,36 @@ const props = defineProps({
 
       <!-- Stats Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white shadow rounded-xl p-4">
+        <div class="bg-white shadow-sm rounded-xl p-4">
           <p class="text-sm text-gray-500">🏘️ Total Cottages</p>
           <p class="text-2xl font-bold">{{ stats.totalCottages }}</p>
         </div>
-        <div class="bg-white shadow rounded-xl p-4">
+        <div class="bg-white shadow-sm rounded-xl p-4">
           <p class="text-sm text-gray-500">🏘️ Total tenants</p>
           <p class="text-2xl font-bold">{{ stats.totalTenants }}</p>
         </div>
-        <div class="bg-white shadow rounded-xl p-4">
+        <div class="bg-white shadow-sm rounded-xl p-4">
           <p class="text-sm text-gray-500">✅ Rent Paid (This Month)</p>
           <p class="text-2xl font-bold">
             R{{ Number(stats.rentPaid).toLocaleString() }}
         </p>
         </div>
-        <div class="bg-white shadow rounded-xl p-4">
+        <div class="bg-white shadow-sm rounded-xl p-4">
           <p class="text-sm text-gray-500">⏳ Amount left</p>
           <p class="text-2xl font-bold">R{{Number(stats.rentLeft).toLocaleString()}}</p>
         </div>
-        <div class="bg-white shadow rounded-xl p-4">
+        <div class="bg-white shadow-sm rounded-xl p-4">
           <p class="text-sm text-gray-500">❌ Unpaid Tenant</p>
           <p class="text-2xl font-bold">{{ Number(stats.rentLeft).toLocaleString() }}</p>
         </div>
-        <div class="bg-white shadow rounded-xl p-4">
+        <div class="bg-white shadow-sm rounded-xl p-4">
           <p class="text-sm text-gray-500">📑 Lease Expiring Soon</p>
           <p class="text-2xl font-bold text-red-500">{{ stats.pendingPayments }}</p>
         </div>
       </div>
 
       <!-- Today's Appointments -->
-      <div class="bg-white shadow rounded-xl p-4">
+      <div class="bg-white shadow-sm rounded-xl p-4">
         <h2 class="text-xl font-semibold mb-4">Pending Confirmations</h2>
         <table class="min-w-full text-sm text-left">
           <thead>
@@ -82,13 +82,13 @@ const props = defineProps({
           </tbody>
         </table>
       </div>
-        <div class="bg-white shadow rounded-xl p-4">
+        <div class="bg-white shadow-sm rounded-xl p-4">
         <h2 class="text-xl font-semibold mb-4">💰 Total Income In A Month</h2>
         <p>R{{ Number(stats.rentDue).toLocaleString() }}</p>
         </div>
 
       <!-- Notifications -->
-      <div class="bg-white shadow rounded-xl p-4">
+      <div class="bg-white shadow-sm rounded-xl p-4">
         <h2 class="text-xl font-semibold mb-4">Notifications</h2>
         <ul class="list-disc pl-5 space-y-2">
           <li v-for="note in notifications" :key="note.id">{{ note.message }}</li>

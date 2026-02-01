@@ -5,7 +5,7 @@
 
             <div v-if="user_appointments.length" class="grid gap-4">
                 <div v-for="appointment in user_appointments" :key="appointment.id"
-                    class="relative p-4 border rounded-lg shadow bg-white">
+                    class="relative p-4 border rounded-lg shadow-sm bg-white">
                     <!-- Appointment Info -->
                     <div>
                         <p class="text-lg font-semibold">Date: {{ appointment.preferred_date }}</p>
@@ -16,7 +16,7 @@
                     <!-- Kebab Menu -->
                         <div class="absolute top-4 " @click.away="closeMenu(appointment.id)">
                             <button @click="toggleMenu(appointment.id)"
-                                class=" bg-blue-500 px-3 py-1 rounded hover:bg-blue-600 focus:outline-none">
+                                class=" bg-blue-500 px-3 py-1 rounded-sm hover:bg-blue-600 focus:outline-hidden">
                                 ⋮ Action
                             </button>
 

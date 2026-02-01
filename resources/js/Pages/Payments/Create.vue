@@ -47,41 +47,41 @@ const submitForm = () => {
     </template>
 
 
-    <div class="max-w-2xl mx-auto bg-white shadow rounded-xl p-6 mt-8">
+    <div class="max-w-2xl mx-auto bg-white shadow-sm rounded-xl p-6 mt-8">
 
         <form @submit.prevent="submitForm" enctype="multipart/form-data" class="space-y-4">
             <div>
                 <label class="block font-medium mb-1" for="amount">Amount Paid (ZAR)</label>
                 <input v-model="form.amount_paid" type="number" step="0.01" id="amount"
-                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    class="w-full border-gray-300 rounded-lg shadow-xs focus:ring-blue-500 focus:border-blue-500"
                     required />
             </div>
 
             <div>
                 <label class="block font-medium mb-1" for="date">Payment Date</label>
                 <input v-model="form.date" type="date" id="date"
-                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    class="w-full border-gray-300 rounded-lg shadow-xs focus:ring-blue-500 focus:border-blue-500"
                     required />
             </div>
 
             <div class="mb-4">
                 <label class="block font-medium mb-1" for="month">Select Month You Paid For</label>
                 <input v-model="form.month_for" type="month" id="month"
-                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    class="w-full border-gray-300 rounded-lg shadow-xs focus:ring-blue-500 focus:border-blue-500"
                     required />
             </div>
 
             <div>
                 <label class="block font-medium mb-1" for="reference">Payment Reference</label>
                 <input v-model="form.reference" type="text" id="reference"
-                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                    class="w-full border-gray-300 rounded-lg shadow-xs focus:ring-blue-500 focus:border-blue-500"
                     required />
             </div>
 
             <div>
                 <label class="block font-medium mb-1" for="proof">Proof of Payment (PDF/Image)</label>
                 <input @change="handleFileUpload" type="file" id="proof" accept=".pdf,image/*"
-                    class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                    class="w-full border-gray-300 rounded-lg shadow-xs focus:ring-blue-500 focus:border-blue-500" />
             </div>
 
             <div class="flex pt-4">

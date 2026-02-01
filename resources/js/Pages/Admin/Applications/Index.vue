@@ -138,7 +138,7 @@ function filterAppointments(status){
             </div>
 
             <input v-model="search" placeholder="Search by user name"
-                class="border px-2 py-1 rounded w-full max-w-sm" />
+                class="border px-2 py-1 rounded-sm w-full max-w-sm" />
 
             <ReusableTable :columns="columns" :rows="rows" :pagination="applications.links">
                 <template #status="{ row }">

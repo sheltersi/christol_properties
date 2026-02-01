@@ -171,7 +171,7 @@ function submitProposedTime() {
     <input
       v-model="search"
       placeholder="Search by user name"
-      class="border px-2 py-1 rounded w-full max-w-sm"
+      class="border px-2 py-1 rounded-sm w-full max-w-sm"
     />
 
     <ReusableTable :columns="columns" :rows="rows" :pagination="appointments.links">
@@ -222,19 +222,19 @@ function submitProposedTime() {
       <p class="mb-2 text-sm">Please provide a reason for revoking this appointment:</p>
       <textarea
         v-model="revokeReason"
-        class="w-full border rounded px-3 py-2 mb-4"
+        class="w-full border rounded-sm px-3 py-2 mb-4"
         rows="4"
         placeholder="Enter reason here..."
       ></textarea>
       <div class="flex justify-end space-x-2">
         <button
           @click="showRevokeModal = false"
-          class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-sm hover:bg-gray-400"
         >Cancel</button>
         <button
           @click="submitRevocation"
           :disabled="!revokeReason.trim()"
-          class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+          class="px-4 py-2 bg-red-600 text-white rounded-sm hover:bg-red-700"
         >Revoke</button>
       </div>
     </div>
@@ -248,16 +248,16 @@ function submitProposedTime() {
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
       <h2 class="text-lg font-semibold mb-4">Propose New Appointment Time</h2>
       <p class="mb-2 text-sm">Select a new date and time:</p>
-      <input type="datetime-local" v-model="newAppointmentTime" class="w-full border rounded px-3 py-2 mb-4" />
+      <input type="datetime-local" v-model="newAppointmentTime" class="w-full border rounded-sm px-3 py-2 mb-4" />
       <div class="flex justify-end space-x-2">
         <button
           @click="showProposeModal = false"
-          class="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-sm hover:bg-gray-400"
         >Cancel</button>
         <button
           @click="submitProposedTime"
           :disabled="!newAppointmentTime"
-          class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+          class="px-4 py-2 bg-purple-600 text-white rounded-sm hover:bg-purple-700"
         >Submit</button>
       </div>
     </div>

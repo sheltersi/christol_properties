@@ -2,14 +2,14 @@
     <div class="relative inline-block text-left">
       <button
         @click="toggleDropdown"
-        class="px-3 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded"
+        class="px-3 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded-sm"
       >
         Actions
       </button>
 
       <div
         v-if="isOpen"
-        class="absolute right-0 z-10 mt-2 w-40 bg-white border rounded shadow-lg"
+        class="absolute right-0 z-10 mt-2 w-40 bg-white border rounded-sm shadow-lg"
       >
         <slot />
       </div>

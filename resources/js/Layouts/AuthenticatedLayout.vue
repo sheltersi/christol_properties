@@ -95,7 +95,7 @@ async function markAsRead(notificationId) {
             }">
             <div class="flex items-center justify-between p-4 border-b">
                 <span class="flex"><img :src="ApplicationLogo" alt="Logo" class="h-8" />
-                    <h1 class="mt-2 font-bold text-lg bg-gradient-to-r from-cyan-800 via-violet-500 to-emerald-500 bg-clip-text text-transparent"
+                    <h1 class="mt-2 font-bold text-lg bg-linear-to-r from-cyan-800 via-violet-500 to-emerald-500 bg-clip-text text-transparent"
                         v-if="!isSidebarCollapsed && showSidebarText">
                         Christo Property
 
@@ -216,7 +216,7 @@ async function markAsRead(notificationId) {
         <div class="flex flex-col flex-1 transition-all duration-300"
             :class="isSidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'">
             <!-- Topbar -->
-            <nav class="bg-white border-b shadow sm:px-6 lg:px-8">
+            <nav class="bg-white border-b shadow-sm sm:px-6 lg:px-8">
                 <div class="flex items-center space-x-4 justify-between h-16">
                     <button class="lg:hidden" @click="drawerOpen = true">
                         <MenuIcon class="h-6 w-6 text-gray-700" />
@@ -269,7 +269,7 @@ async function markAsRead(notificationId) {
             </nav>
 
             <!-- Header Slot -->
-            <header v-if="$slots.header" class="bg-white shadow">
+            <header v-if="$slots.header" class="bg-white shadow-sm">
                 <div class="max-w-7xl mx-auto py-6 px-6">
                     <slot name="header" />
                 </div>

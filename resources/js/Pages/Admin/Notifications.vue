@@ -47,7 +47,7 @@ const filteredNotifications = computed(()=>{
             <h1 class="font-bold ms-4 p-2">{{ notifications.length }} Notification</h1>
             <!-- TODO::Add a seach bar for notifications, has to be in the same line with this notification length -->
             <ul>
-                <li v-for="notification in notifications" :key="notification.id" class="mb-4 p-4 border rounded">
+                <li v-for="notification in notifications" :key="notification.id" class="mb-4 p-4 border rounded-sm">
                     <p><strong>{{ notification.user_name }}</strong> requested an appointment on <strong>{{
                             notification.preferred_date }}</strong> at <strong>{{ notification.preferred_time
                             }}</strong>.</p>

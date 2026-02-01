@@ -15,13 +15,13 @@
         <div class="lg:flex lg:justify-center lg:items-start my-10 space-x-8 lg:ps-12  ">
             <!-- form card -->
 
-            <form @submit.prevent="submit" class="lg:w-3/4 p-6 bg-white rounded shadow ">
+            <form @submit.prevent="submit" class="lg:w-3/4 p-6 bg-white rounded-sm shadow-sm ">
 
                 <h2 class="text-lg font-bold mb-4">Book a Viewing Appointment</h2>
 
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">Cottage Number</label>
-                    <select v-model="form.cottage_number" class="mt-1 block w-full border rounded px-2 py-2" required>
+                    <select v-model="form.cottage_number" class="mt-1 block w-full border rounded-sm px-2 py-2" required>
                         <option value="" disabled>Select a cottage</option>
                         <option v-for="num in 25" :key="num" :value="num">
                             Cottage {{ num }}
@@ -34,7 +34,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Preferred Date</label>
-                    <input type="date" v-model="form.preferred_date" class="mt-1 block w-full border rounded" required>
+                    <input type="date" v-model="form.preferred_date" class="mt-1 block w-full border rounded-sm" required>
                     <p v-if="form.errors.preferred_date" class="text-red-600 text-sm mt-1">
                         {{ form.errors.preferred_date }}
                     </p>
@@ -42,7 +42,7 @@
 
                 <div class="mt-4">
                     <label class="block text-sm font-medium text-gray-700">Preferred Time</label>
-                    <input type="time" v-model="form.preferred_time" class="mt-1 block w-full border rounded" required>
+                    <input type="time" v-model="form.preferred_time" class="mt-1 block w-full border rounded-sm" required>
                     <p v-if="form.errors.preferred_time" class="text-red-600 text-sm mt-1">
                         {{ form.errors.preferred_time }}
                     </p>
@@ -50,19 +50,19 @@
 
                 <div class="mt-4">
                     <label class="block text-sm font-medium text-gray-700">Message (optional)</label>
-                    <textarea v-model="form.message" class="mt-1 block w-full border rounded"></textarea>
+                    <textarea v-model="form.message" class="mt-1 block w-full border rounded-sm"></textarea>
                     <p v-if="form.errors.message" class="text-red-600 text-sm mt-1">
                         {{ form.errors.message }}
                     </p>
                 </div>
 
-                <button type="submit" class="mt-4 bg-btn text-white px-4 py-2 rounded hover:bg-blue-700">
+                <button type="submit" class="mt-4 bg-btn text-white px-4 py-2 rounded-sm hover:bg-blue-700">
                     Submit Appointment Request
                 </button>
             </form>
 
             <!-- summary card -->
-            <div class="lg:w-1/2 w-4/5 p-6 me-6 bg-gray-400 rounded shadow sticky top-6 h-fit">
+            <div class="lg:w-1/2 w-4/5 p-6 me-6 bg-gray-400 rounded-sm shadow-sm sticky top-6 h-fit">
                 <h2 class="text-xl font-bold mb-4  border-b border-gray-300">Your Appointment Summary</h2>
                 <div class="space-y-2 text-sm lg:me-4 text-gray-700">
                     <p><strong>Cottage Number:</strong>

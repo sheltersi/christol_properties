@@ -9,7 +9,7 @@
         :type="type"
         :value="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
-        class="block w-full rounded-md shadow-sm border-gray-300 focus:ring focus:ring-opacity-50"
+        class="block w-full rounded-md shadow-xs border-gray-300 focus:ring-3 focus:ring-opacity-50"
         :class="{ 'border-red-500': error }"
       />
       <p v-if="error" class="text-red-600 text-sm mt-1">{{ error }}</p>

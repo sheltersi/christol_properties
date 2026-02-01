@@ -19,7 +19,7 @@ const isOpen = ref(props.defaultOpen ?? false);
         <!-- Parent menu -->
         <button
             @click="isOpen = !isOpen"
-            class="flex items-center w-full px-4 py-2 text-gray-700 rounded hover:bg-gray-200 transition"
+            class="flex items-center w-full px-4 py-2 text-gray-700 rounded-sm hover:bg-gray-200 transition"
         >
             <FontAwesomeIcon :icon="icon" class="ml-2 mr-3 icons-color" />
             <span v-if="!isSidebarCollapsed && showSidebarText" class="flex-1 text-left">{{ label }}</span>

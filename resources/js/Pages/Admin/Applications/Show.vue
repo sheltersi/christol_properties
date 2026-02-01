@@ -19,7 +19,7 @@ const backButton = () => {
                 {{ application.user.first_name }}'s Tenant Application
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-sm border">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-xs border">
 
                 <!-- Personal Info -->
                 <div>

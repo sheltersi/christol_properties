@@ -50,7 +50,7 @@ defineProps({
         <component
           :is="link.url ? 'button' : 'span'"
           v-html="link.label"
-          class="px-3 py-1 text-sm border rounded"
+          class="px-3 py-1 text-sm border rounded-sm"
           :class="{ 'bg-blue-600 text-white': link.active }"
           @click="() => router.get(link.url)"
           :disabled="!link.url"

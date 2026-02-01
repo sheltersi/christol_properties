@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/vue3';
 </script>
 
 <template>
-     <div class="bg-gradient-to-r from-cyan-800 via-cyan-700 to-cyan-500 ">
+     <div class="bg-linear-to-r from-cyan-800 via-cyan-700 to-cyan-500 ">
     <div
         class="flex min-h-screen flex-col items-center pt-6 sm:justify-center sm:pt-0  mx-3 sm:m-0">
 

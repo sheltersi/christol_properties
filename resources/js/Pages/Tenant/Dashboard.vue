@@ -21,7 +21,7 @@ const props = defineProps({
         </template>
         <div class="p-6 space-y-6">
       <!-- Cottage Info -->
-      <div class="bg-white shadow rounded-xl p-4">
+      <div class="bg-white shadow-sm rounded-xl p-4">
         <h2 class="text-lg font-semibold">🏡 My Unit</h2>
         <p><strong>Unit Number:</strong> {{ tenant.current_lease?.cottage.number || "NA" }}</p>
         <p><strong>Location:</strong> {{ tenant.current_lease?.cottage.location || "NA" }}</p>
@@ -29,7 +29,7 @@ const props = defineProps({
       </div>
 
       <!-- Payment Info -->
-      <div class="bg-white shadow rounded-xl p-4">
+      <div class="bg-white shadow-sm rounded-xl p-4">
         <h2 class="text-lg font-semibold">💳 Rent Status</h2>
         <p><strong>Last Payment updated date:</strong> {{ tenant.current_lease.current_payment.created_at ? new Date(tenant.current_lease.current_payment.created_at).toLocaleString('en-ZA', {
           year: 'numeric',
@@ -46,10 +46,10 @@ const props = defineProps({
         <!-- <p><strong>Status:</strong> {{ tenant.current_lease.current_payment.status ?? 'No payments yet' }}</p> -->
 <p><strong>Status: </strong>
 <span :class="{
-  'bg-green-500 px-2.5 py-0.5 text-xs text-white rounded inline-block ': tenant.current_lease.current_payment.status === 'approved',
-  'bg-orange-400 px-2.5 py-0.5 text-xs text-white rounded inline-block': tenant.current_lease.current_payment.status === 'partial',
-  'bg-yellow-500 px-2.5 py-0.5 text-xs text-white rounded inline-block': tenant.current_lease.current_payment.status === 'pending',
-  'bg-red-600 px-2.5 py-0.5 text-xs text-white rounded inline-block': tenant.current_lease.current_payment.status === 'declined'
+  'bg-green-500 px-2.5 py-0.5 text-xs text-white rounded-sm inline-block ': tenant.current_lease.current_payment.status === 'approved',
+  'bg-orange-400 px-2.5 py-0.5 text-xs text-white rounded-sm inline-block': tenant.current_lease.current_payment.status === 'partial',
+  'bg-yellow-500 px-2.5 py-0.5 text-xs text-white rounded-sm inline-block': tenant.current_lease.current_payment.status === 'pending',
+  'bg-red-600 px-2.5 py-0.5 text-xs text-white rounded-sm inline-block': tenant.current_lease.current_payment.status === 'declined'
 }">
   {{ tenant.current_lease.current_payment.status.charAt(0).toUpperCase() + tenant.current_lease.current_payment.status.slice(1) }}
 </span></p>
@@ -63,7 +63,7 @@ const props = defineProps({
 
 
       <!-- Maintenance -->
-      <div class="bg-white shadow rounded-xl p-4">
+      <div class="bg-white shadow-sm rounded-xl p-4">
         <h2 class="text-lg font-semibold">🛠 Maintenance Requests</h2>
         <ul>
           <!-- <li v-for="req in maintenance" :key="req.id"> -->
@@ -77,7 +77,7 @@ const props = defineProps({
       </div>
 
       <!-- Appointments -->
-      <div class="bg-white shadow rounded-xl p-4">
+      <div class="bg-white shadow-sm rounded-xl p-4">
         <h2 class="text-lg font-semibold">📅 Upcoming Appointments</h2>
         <ul>
           <li v-for="appt in appointments" :key="appt.id">

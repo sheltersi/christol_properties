@@ -6,7 +6,7 @@
             </h2>
         </template>
 
-        <div class="max-w-4xl mx-auto mt-8 p-6 bg-white rounded shadow">
+        <div class="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-sm shadow-sm">
             <form @submit.prevent="submit">
                 <!-- Applicant Information -->
                 <h3 class="text-lg font-bold mb-4">Applicant Information</h3>
@@ -60,14 +60,14 @@
                     <!-- Names and Ages of Other Occupants -->
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Other Occupants (names and ages)</label>
-                        <textarea v-model="form.occupants" class="mt-1 block w-full rounded border-gray-300"
+                        <textarea v-model="form.occupants" class="mt-1 block w-full rounded-sm border-gray-300"
                             placeholder="e.g. John (30), Mary (5)"></textarea>
                     </div>
 
                     <!-- Pets -->
                     <div>
                         <label class="block font-medium text-sm text-gray-700">Do you have pets?</label>
-                        <select v-model="form.has_pets" class="mt-1 block w-full rounded border-gray-300">
+                        <select v-model="form.has_pets" class="mt-1 block w-full rounded-sm border-gray-300">
                             <option value="" disabled>Select an option</option>
                             <option value="yes">Yes</option>
                             <option value="no">No</option>
@@ -76,7 +76,7 @@
 
                     <div v-if="form.has_pets === 'yes'">
                         <label class="block font-medium text-sm text-gray-700">Pet Details</label>
-                        <textarea v-model="form.pet_details" class="mt-1 block w-full rounded border-gray-300"
+                        <textarea v-model="form.pet_details" class="mt-1 block w-full rounded-sm border-gray-300"
                             placeholder="e.g. 2 dogs (small breeds)"></textarea>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
 
                 <!-- Submit -->
                 <div class="mt-6">
-                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
+                    <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-sm hover:bg-blue-700">
                         Submit Application
                     </button>
                 </div>
@@ -225,6 +225,6 @@ function submit() {
 
 <style scoped>
 .input {
-    @apply w-full mt-1 px-3 py-2 border rounded shadow-sm focus:ring-blue-500 focus:border-blue-500;
+    @apply w-full mt-1 px-3 py-2 border rounded shadow-xs focus:ring-blue-500 focus:border-blue-500;
 }
 </style>

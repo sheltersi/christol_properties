@@ -13,7 +13,7 @@
       <!-- Mobile Menu Button -->
       <button
         @click="drawerOpen = true"
-        class="lg:hidden fixed top-4 left-4 z-50 bg-gray-800 text-white p-2 rounded"
+        class="lg:hidden fixed top-4 left-4 z-50 bg-gray-800 text-white p-2 rounded-sm"
       >
         <MenuIcon />
       </button>

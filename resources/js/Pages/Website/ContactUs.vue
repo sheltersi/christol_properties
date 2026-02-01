@@ -6,19 +6,19 @@
     </div>
 
     <div class="mb-6 max-w-7xl md:mx-auto md:ps-6 flex flex-col md:flex-row gap-6 mx-[20px]">
-       <div class="bg-white w-full md:w-1/3 p-6 rounded shadow">
+       <div class="bg-white w-full md:w-1/3 p-6 rounded-sm shadow-sm">
         <h1>Call Us: <br>
           <font-awesome-icon :icon="['fas', 'phone']" class="me-2 text-green-500" />
           +27 63 326 4684
         </h1>
        </div>
-      <div class="bg-white w-full md:w-1/3 p-6 rounded shadow">
+      <div class="bg-white w-full md:w-1/3 p-6 rounded-sm shadow-sm">
         <h1>Email Us: <br>
           <font-awesome-icon :icon="['fas', 'envelope']" class="me-2 text-blue-500" />
           info@christolproperty.co.za
         </h1>
        </div>
-        <div class="bg-white w-full md:w-1/3 p-6 rounded shadow">
+        <div class="bg-white w-full md:w-1/3 p-6 rounded-sm shadow-sm">
           <h1>Our Location:</h1>
             <font-awesome-icon :icon="['fas', 'location-dot']" class="me-2 text-red-500" />
             Bramley Park, Johannesburg, South Africa
@@ -36,8 +36,8 @@
     <div class="max-w-7xl mx-auto md:ps-6 flex flex-col md:flex-row gap-6">
 
             <!-- Contact Info Card -->
-      <div class="bg-[darkcyan] w-full md:w-1/3 p-6 rounded shadow">
-      <!-- <div class="bg-blue-800 max-w-xl mx-auto p-6 rounded shadow"> -->
+      <div class="bg-[darkcyan] w-full md:w-1/3 p-6 rounded-sm shadow-sm">
+      <!-- <div class="bg-blue-800 max-w-xl mx-auto p-6 rounded-sm shadow-sm"> -->
         <h1 class="text-white text-xl font-bold">Contact Information</h1>
         <p class="text-white text-l ps-4 pt-4"> <font-awesome-icon :icon="['fas', 'phone']" class="me-2" /> +27 63 326
           4684</p>
@@ -59,8 +59,8 @@
 
       </div>
        <!-- Contact Form Card -->
-      <div class="w-full md:w-1/2 bg-white p-6 rounded shadow">
-      <!-- <div class="max-w-2xl mx-auto my-10 bg-white p-6 rounded shadow"> -->
+      <div class="w-full md:w-1/2 bg-white p-6 rounded-sm shadow-sm">
+      <!-- <div class="max-w-2xl mx-auto my-10 bg-white p-6 rounded-sm shadow-sm"> -->
         <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
         <form @submit.prevent="submitForm" class="space-y-4">
              <p v-if="successMessage" class="text-green-800 max-w-6xl mx-auto bg-green-300 py-[15px] ps-[10px] mt-2">{{ successMessage }}</p>
@@ -89,7 +89,7 @@
           </div>
 
           <div class="flex justify-end">
-            <button type="submit" class="bg-[darkcyan] text-white px-4 py-2 rounded hover:bg-blue-700"
+            <button type="submit" class="bg-[darkcyan] text-white px-4 py-2 rounded-sm hover:bg-blue-700"
               :disabled="processing">
               {{ processing ? 'Sending...' : 'Send Message' }}
             </button>
@@ -145,7 +145,7 @@ function submitForm() {
 
 <style scoped>
 .input {
-  @apply w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-300;
+  @apply w-full border border-gray-300 px-3 py-2 rounded focus:outline-hidden focus:ring-2 focus:ring-blue-300;
 }
 
 .contact-hr{
