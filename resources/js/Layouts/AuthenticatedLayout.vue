@@ -255,7 +255,7 @@ async function markAsRead(notificationId) {
                                 <button
                                     class="user-cicle inline-flex items-center text-sm text-gray-600 hover:text-gray-800">
                                     <font-awesome-icon :icon="['fas', 'user']" class="mr-1 text-cyan-500" />
-                                    {{ $page.props.auth.user?.first_name ?? 'unknown' }}
+                                    {{ $page.props.auth.user?.name ?? 'unknown' }}
                                     <font-awesome-icon :icon="['fas', 'angle-down']" class="ms-2 " />
                                 </button>
                             </template>

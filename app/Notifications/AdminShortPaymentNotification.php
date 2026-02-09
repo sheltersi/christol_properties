@@ -41,7 +41,7 @@ class AdminShortPaymentNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Hello '.$this->admin->first_name)
+            ->greeting('Hello '.$this->admin->name)
             ->subject('Kindly note that tenant '.$this->tenant->full_name. 'has made a short payment of R'.$this->amount. ' for the month of '.$this->month.'. You will be notified once they have completed their payment.')
             ->action('Login', url('/'))
             ->line('Thank you for using our application!');

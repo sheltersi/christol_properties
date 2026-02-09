@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         $password = 'shelo1234';
 
         User::create([
-            'first_name' => 'shelter',
+            'name' => 'shelter',
             'last_name' => 'sibanda',
             'email' => 'shelter@gmail.com',
             'email_verified_at' => now(),
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'chris',
+            'name' => 'chris',
             'last_name' => 'ugbaja',
             'role' => 'admin',
             'email' => 'chris@gmail.com',
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'fadzai',
+            'name' => 'fadzai',
             'last_name' => 'bridges',
             'role' => 'tenant',
             'email' => 'fadzai@gmail.com',
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'first_name' => 'susan',
+            'name' => 'susan',
             'last_name' => 'williams',
             'role' => 'tenant',
             'email' => 'susan@gmail.com',

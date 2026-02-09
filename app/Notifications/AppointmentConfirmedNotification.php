@@ -38,7 +38,7 @@ class AppointmentConfirmedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Hi '.$this->appointment->user->first_name)
+            ->greeting('Hi '.$this->appointment->user->name)
             ->line('Your appointment to view cottage number '.$this->appointment->cottage_number .' on ' .$this->appointment->preferred_date . ' at ' . $this->appointment->preferred_time . ' has been confirmed.')
             ->action('View Appointment Details', url('/'))
             ->line('Thank you for using our application!');

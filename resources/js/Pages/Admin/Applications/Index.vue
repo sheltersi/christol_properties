@@ -68,7 +68,7 @@ const search = ref(props.filters.search || '');
 
 const columns = [
     { key: 'id', label: 'ID' },
-    { key: 'user.first_name', label: 'User' },
+    { key: 'user.name', label: 'User' },
     { key: 'occupants', label: 'Occupants' },
     { key: 'phone', label: 'Phone' },
     { key: 'id_number', label: 'ID' },
@@ -78,7 +78,7 @@ const columns = [
 
 const rows = props.applications.data.map(item => ({
     ...item,
-    'user.first_name': item.user?.first_name || 'N/A',
+    'user.name': item.user?.name || 'N/A',
 }));
 
 const viewApplication = (id) => {

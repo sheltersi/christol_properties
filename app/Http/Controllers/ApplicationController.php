@@ -20,8 +20,8 @@ class ApplicationController extends Controller
         $rental_applications = Application::with('user')
             ->when($search, fn($q) =>
             $q->whereHas('user', fn($q) =>
-            // $q->where('first_name', 'like', "%$search%")))
-            $q->where('first_name', 'like', "%$search%")
+            // $q->where('name', 'like', "%$search%")))
+            $q->where('name', 'like', "%$search%")
                 ->orWhere('last_name', 'like', "%$search%")))
             ->latest()
             ->paginate(10)
@@ -48,7 +48,7 @@ class ApplicationController extends Controller
             })
             ->when($search, fn ($query) =>
             $query->whereHas('user', fn ($q) =>
-                $q->where('first_name', 'like', "%$search%")
+                $q->where('name', 'like', "%$search%")
                   ->orWhere('last_name', 'like', "%$search%")
             )
         )

@@ -38,7 +38,7 @@ class ApplicationAccepted extends Notification
     {
         return (new MailMessage)
             ->subject('Your New Application Status')
-            ->greeting('Hi '.$this->application->user->first_name)
+            ->greeting('Hi '.$this->application->user->name)
             ->line('Congratutations, Your application to rent a cottage at christol properties has been accepted.')
             ->action('View Application', url('/'))
             ->line('Thank you for using our application!');

@@ -16,7 +16,7 @@ const props = defineProps({
 
   <AuthenticatedLayout>
         <template #header>
-      <h1 class="text-2xl font-bold">Hello, {{ tenant.user?.first_name }} 👋</h1>
+      <h1 class="text-2xl font-bold">Hello, {{ tenant.user?.name }} 👋</h1>
             <hr class="greeting-border w-44 mt-2 border-cyan-600">
         </template>
         <div class="p-6 space-y-6">

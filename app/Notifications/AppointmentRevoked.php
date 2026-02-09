@@ -36,7 +36,7 @@ class AppointmentRevoked extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Hi ' . $this->appointment->user->first_name)
+            ->greeting('Hi ' . $this->appointment->user->name)
             ->subject('Your appointment has been revoked')
             ->line('We are writing to let you know that your appointment has been revoked for the following reason:')
             ->line('Reason: ' . $this->appointment->revoked_reason)

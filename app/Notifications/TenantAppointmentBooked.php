@@ -37,7 +37,7 @@ class TenantAppointmentBooked extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Hi'.$this->appointment->user->first_name)
+            ->greeting('Hi'.$this->appointment->user->name)
             ->subject('Appointment Booked')
             ->line('Your Appointment to view the cottage has been submitted to the Landlord, he will get back to you shortly.')
             ->action('View Appointment details', url('/'))

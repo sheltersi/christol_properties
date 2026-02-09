@@ -45,7 +45,7 @@ class OverPaymentNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Hi '.$this->admin->first_name)
+            ->greeting('Hi '.$this->admin->name)
             ->subject('New payment has been made')
             ->line('Tenant '.$this->tenant->full_name.' has overpaid below are the details')
             ->line('Tenant '.$this->tenant->full_name.'<br> Amount: '.$this->amount.'<br>'. 'Month: '.$this->month

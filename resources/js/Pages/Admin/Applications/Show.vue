@@ -16,7 +16,7 @@ const backButton = () => {
     <AuthenticatedLayout>
         <div class="p-6 mt-4 mx-4">
             <h2 class="text-3xl font-semibold mb-4">
-                {{ application.user.first_name }}'s Tenant Application
+                {{ application.user.name }}'s Tenant Application
             </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-xl shadow-xs border">
@@ -25,7 +25,7 @@ const backButton = () => {
                 <div>
                     <h3 class="text-lg font-semibold mb-2 text-gray-700">Personal Information</h3>
                     <ul class="text-sm text-gray-600 space-y-1">
-                        <li><span class="font-medium text-gray-800">Full Name:</span> {{ application.user.first_name }}
+                        <li><span class="font-medium text-gray-800">Full Name:</span> {{ application.user.name }}
                             {{ application.user.last_name }}</li>
                         <li><span class="font-medium text-gray-800">Phone Number:</span> {{ application.phone }}</li>
                         <li><span class="font-medium text-gray-800">Date of Birth:</span> {{ application.dob }}</li>
@@ -102,10 +102,10 @@ const backButton = () => {
 <!-- <template>
   <AuthenticatedLayout>
     <div class="p-6 space-y-4 mt-4 mx-4 bg-white">
-      <h2 class="text-2xl font-bold">{{application.user.first_name}} Tenant application Details</h2>
+      <h2 class="text-2xl font-bold">{{application.user.name}} Tenant application Details</h2>
       <hr>
       <div class="space-y-2">
-        <p><strong>User:</strong> {{ application.user.first_name }} {{ application.user.last_name }}</p>
+        <p><strong>User:</strong> {{ application.user.name }} {{ application.user.last_name }}</p>
         <p><strong>Phone Number:</strong> {{ application.phone }}</p>
         <p><strong>Date of Birth</strong> {{ application.dob }}</p>
         <p><strong>ID Number / Passport:</strong> {{ application.id_number }}</p>

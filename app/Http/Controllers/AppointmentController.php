@@ -52,7 +52,7 @@ class AppointmentController extends Controller
             })
             ->when($search, fn ($query) =>
             $query->whereHas('user', fn ($q) =>
-                $q->where('first_name', 'like', "%$search%")
+                $q->where('name', 'like', "%$search%")
                   ->orWhere('last_name', 'like', "%$search%")
             )
         )
@@ -113,7 +113,7 @@ class AppointmentController extends Controller
 
     public function show(Appointment $appointment)
     {
-        // dd($appointment->user->first_name);
+        // dd($appointment->user->name);
         $appointment->load('user');
         return Inertia::render('Appointments/Show', [
             'appointment' => $appointment,

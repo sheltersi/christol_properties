@@ -37,7 +37,7 @@ class ApplicationDeclined extends Notification
     {
         return (new MailMessage)
             ->subject('Application Declined')
-            ->greeting('Hi '.$this->application->user->first_name)
+            ->greeting('Hi '.$this->application->user->name)
             ->line('We regret to inform you that your application to rent your desired cottage has been declined')
             ->line('Reason ')
             ->action('Login', url('/'))

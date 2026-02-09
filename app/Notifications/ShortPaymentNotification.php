@@ -40,7 +40,7 @@ class ShortPaymentNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Hi '.$this->tenant->first_name)
+            ->greeting('Hi '.$this->tenant->name)
             ->subject('New Payment Notification')
             ->line('Your updated payment details for amount R'.$this->amount.' for the month of'.$this->month.' has been received. Please make a full payment as soon as possible')
             ->action('Notification Action', url('/'))

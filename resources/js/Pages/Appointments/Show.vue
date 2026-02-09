@@ -18,10 +18,10 @@ const backButton = () => {
 <template>
   <AuthenticatedLayout>
     <div class="p-6 space-y-4 mt-4 mx-4 bg-white">
-      <h2 class="text-2xl font-bold">{{appointment.user.first_name}} Tenant Appointment Details</h2>
+      <h2 class="text-2xl font-bold">{{appointment.user.name}} Tenant Appointment Details</h2>
       <hr>
       <div class="space-y-2">
-        <p><strong>User:</strong> {{ appointment.user.first_name }} {{ appointment.user.last_name }}</p>
+        <p><strong>User:</strong> {{ appointment.user.name }} {{ appointment.user.last_name }}</p>
         <p><strong>Cottage No:</strong> {{ appointment.cottage_number }}</p>
         <p><strong>Date:</strong> {{appointment.proposed_time ? appointment.proposed_time : appointment.preferred_date }}</p>
         <p><strong>Time:</strong> {{ appointment.preferred_time }}</p>

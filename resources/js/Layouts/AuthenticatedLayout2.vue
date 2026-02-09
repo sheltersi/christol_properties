@@ -41,7 +41,7 @@ const drawerOpen = ref(false);
                                 <!-- FontAwesome User Icon -->
                                 <font-awesome-icon :icon="['fas', 'user']" class="mr-2 text-gray-500" />
 
-                                {{ $page.props.auth.user.first_name }}
+                                {{ $page.props.auth.user.name }}
 
                                 <font-awesome-icon :icon="['fas', 'angle-down']" class="ms-2"/>
                             </button>

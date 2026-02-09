@@ -39,7 +39,7 @@ class ContactFormMail extends Notification
     {
         return (new MailMessage)
             ->subject('New contact us Message')
-            ->greeting('Hi '.ucfirst($this->user->first_name).'!')
+            ->greeting('Hi '.ucfirst($this->user->name).'!')
             ->line('They has been a new entry from the contact us form with the following details.')
             ->line('Name: '.$this->validated['name'])
             ->line('Email Address: '.$this->validated['email'])

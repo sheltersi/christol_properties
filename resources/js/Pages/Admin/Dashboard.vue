@@ -66,7 +66,7 @@ const props = defineProps({
           </thead>
           <tbody>
             <tr v-for="appt in recentAppointments" :key="appt.id" class="border-t">
-              <td class="px-4 py-2">{{ appt.user.first_name }} {{ appt.user.last_name }}</td>
+              <td class="px-4 py-2">{{ appt.user.name }} {{ appt.user.last_name }}</td>
               <td class="px-4 py-2">{{ appt.cottage_number }}</td>
               <td class="px-4 py-2">
                 <span :class="{
